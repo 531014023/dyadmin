@@ -29,5 +29,10 @@ var dialog = {
           callback(value);
           layer.close(index);
       });
+  },
+  loading:function (type) {
+      type = type||0;
+    var index = layer.load(type,{time:10*1000});
+      return index;
   }
 };

@@ -35,6 +35,9 @@
     <script src="__PUBLIC__/assets/js/html5shiv.js"></script>
     <script src="__PUBLIC__/assets/js/respond.min.js"></script>
     <![endif]-->
+    <style>
+        .login-container{padding-top: 200px;}
+    </style>
 </head>
 
 <body class="login-layout">
@@ -153,8 +156,11 @@
         var password=$('#password').val();
         var username=$('#username').val();
         // dialog.success(password);
-        dialog.success("登录成功",app+"/admin/index/index");
-
+        var index = dialog.loading(1);
+//        dialog.success("登录成功",app+"/admin/index/index");
+        setTimeout(function () {
+            layer.close(index);
+        },1000*2);
     });
     enter($("#button"));
 </script>
