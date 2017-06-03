@@ -139,7 +139,9 @@
 </script>
 
 <!-- inline scripts related to this page -->
-
+<script src="__ADMIN_JS__/fun.js"></script>
+<script src="__PUBLIC__/layer/layer.js"></script>
+<script src="__ADMIN_JS__/dialog.js"></script>
 <script type="text/javascript">
     function show_box(id) {
         jQuery('.widget-box.visible').removeClass('visible');
@@ -151,7 +153,17 @@
         var password=$('#password').val();
         var username=$('#username').val();
         // dialog.success(password);
+        dialog.confirm('测试',function (bol) {
+            if(bol){
+                dialog.prompt(function (value) {
+                    dialog.success(value);
+                });
+            }else{
+                dialog.error('点击的是取消');
+            }
+        });
 
-    })
+    });
+    enter($("#button"));
 </script>
 </html>
