@@ -46,6 +46,7 @@
         *{margin: 0;padding: 0;}
         .ace-nav{height: auto;}
         .main-content{min-height: inherit;}
+        iframe{width: 100%;height: 100%;}
         small{font-size: 90%;}
     </style>
 </head>
@@ -115,8 +116,8 @@
         </script>
 
         <ul class="nav nav-list">
-            <li class="">
-                <a href="javascript:iframe('index')">
+            <li class="active">
+                <a href="javascript:iframe(this,'index')">
                     <i class="icon-home"></i>
                     <span class="menu-text"> 首页 </span>
                 </a>
@@ -133,19 +134,19 @@
                 <ul class="submenu">
 
                     <li class="">
-                        <a href="javascript:iframe('userlist')">
+                        <a href="javascript:iframe(this,'userlist')">
                             <i class="icon-double-angle-right"></i>
                             用户列表
                         </a>
                     </li>
                     <li class="">
-                        <a href="javascript:iframe('stoptrad')">
+                        <a href="javascript:iframe(this,'stoptrad')">
                             <i class="icon-double-angle-right"></i>
                             禁止交易
                         </a>
                     </li>
                     <li class="">
-                        <a href="javascript:iframe('tradinfo')">
+                        <a href="javascript:iframe(this,'tradinfo')">
                             <i class="icon-double-angle-right"></i>
                             交易明细
                         </a>
@@ -165,7 +166,7 @@
     </div>
     <div class="main-content">
         <!-- <div style="clear: both;"></div> -->
-        <iframe src="https://www.baidu.com" frameborder="0" width="100%" height="100%" id="iframe"></iframe>
+        <iframe src="https://www.baidu.com" frameborder="0" id="iframe"></iframe>
     </div>
 </div>
 
@@ -199,22 +200,22 @@
     if("ontouchend" in document) document.write("<script src='__PUBLIC__/assets/js/jquery.mobile.custom.min.js'>"+"<"+"script>");
 </script>
 <script src="__PUBLIC__/assets/js/bootstrap.min.js"></script>
-<script src="__PUBLIC__/assets/js/typeahead-bs2.min.js"></script>
+<!--<script src="__PUBLIC__/assets/js/typeahead-bs2.min.js"></script>-->
 
 <!-- page specific plugin scripts -->
-<script src="__PUBLIC__/assets/js/chosen.jquery.min.js"></script>
+<!--<script src="__PUBLIC__/assets/js/chosen.jquery.min.js"></script>-->
 <!--[if lte IE 8]>
 <script src="__PUBLIC__/assets/js/excanvas.min.js"></script>
 <![endif]-->
 
-<script src="__PUBLIC__/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
-<script src="__PUBLIC__/assets/js/jquery.ui.touch-punch.min.js"></script>
-<script src="__PUBLIC__/assets/js/jquery.slimscroll.min.js"></script>
-<script src="__PUBLIC__/assets/js/jquery.easy-pie-chart.min.js"></script>
-<script src="__PUBLIC__/assets/js/jquery.sparkline.min.js"></script>
-<script src="__PUBLIC__/assets/js/flot/jquery.flot.min.js"></script>
-<script src="__PUBLIC__/assets/js/flot/jquery.flot.pie.min.js"></script>
-<script src="__PUBLIC__/assets/js/flot/jquery.flot.resize.min.js"></script>
+<!--<script src="__PUBLIC__/assets/js/jquery-ui-1.10.3.custom.min.js"></script>-->
+<!--<script src="__PUBLIC__/assets/js/jquery.ui.touch-punch.min.js"></script>-->
+<!--<script src="__PUBLIC__/assets/js/jquery.slimscroll.min.js"></script>-->
+<!--<script src="__PUBLIC__/assets/js/jquery.easy-pie-chart.min.js"></script>-->
+<!--<script src="__PUBLIC__/assets/js/jquery.sparkline.min.js"></script>-->
+<!--<script src="__PUBLIC__/assets/js/flot/jquery.flot.min.js"></script>-->
+<!--<script src="__PUBLIC__/assets/js/flot/jquery.flot.pie.min.js"></script>-->
+<!--<script src="__PUBLIC__/assets/js/flot/jquery.flot.resize.min.js"></script>-->
 
 <!-- ace scripts -->
 
@@ -224,17 +225,15 @@
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
     window.onload = function(){
-        $(".chosen-select").chosen();
         var windowH = $(document.body).outerHeight(true);
         var navH = $("#navbar").outerHeight(true);
         $(".main-content").height(windowH-navH);
+        $("#iframe").height(windowH-navH);
+        elem();
     }
 </script>
 <script>
-    window.onload = function () {
-
-    }
-    function iframe(str) {
+    function iframe(obj,str) {
         switch (str){
             case 'index':
                 $("#iframe").attr('src','https://dy.zetaluoxin.cn/index.php');
@@ -243,6 +242,25 @@
                 $("#iframe").attr("src","https://www.baidu.com");
                 break;
         }
+    }
+
+    //导航样式控制
+    function elem() {
+        $(".nav-list li").click(function () {
+           var ul = $(this).find(".dropdown-toggle");
+            if(!ul[0]){
+                $(".nav-list li").removeClass('active');
+                $(this).attr('class','active');
+                var par = $(this).parent().attr("class");
+                if(par == 'nav nav-list'){
+                    $(".nav-list>li").removeClass('open');
+                    $(".nav-list>li>ul").css("display","none");
+                }
+            }
+        });
+        $(".submenu>li").click(function () {
+            $(this).parent().parent().addClass('active');
+        });
     }
 </script>
 </html>

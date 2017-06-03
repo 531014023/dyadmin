@@ -1,6 +1,7 @@
 /**
  * Created by dy on 2017/6/3.
  */
+var app = "/dyadmin";
 /*
 * 回车键快捷方式
 * @param obj object 快捷按键首次按的jq对象

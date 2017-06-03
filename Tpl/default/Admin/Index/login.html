@@ -153,15 +153,7 @@
         var password=$('#password').val();
         var username=$('#username').val();
         // dialog.success(password);
-        dialog.confirm('测试',function (bol) {
-            if(bol){
-                dialog.prompt(function (value) {
-                    dialog.success(value);
-                });
-            }else{
-                dialog.error('点击的是取消');
-            }
-        });
+        dialog.success("登录成功",app+"/admin/index/index");
 
     });
     enter($("#button"));
