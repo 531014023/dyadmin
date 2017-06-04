@@ -32,7 +32,29 @@ var dialog = {
   },
   loading:function (type) {
       type = type||0;
-    var index = layer.load(type,{time:10*1000});
+      var index = layer.load(type,{time:10*1000});
       return index;
+  },
+  msg:function (content,isbtn,callback) {
+      layer.msg(content,isbtn?{
+          btn:['明白了','知道了'],
+          time:0
+      }:{
+          time:2000
+      },function () {
+          callback();
+      });
+  },
+  msgicon:function (content,isbtn,icon,callback) {
+      layer.msg(content,isbtn?{
+          icon:icon,
+          btn:['明白了','知道了'],
+          time:0
+      }:{
+          icon:icon,
+          time:2000
+      },function () {
+          callback();
+      });
   }
 };
