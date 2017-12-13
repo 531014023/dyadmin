@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    /*.main-content{
+        background: url("../../../Public/background/lw.jpg");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+    }*/
+    #upload_img object{height: 140px;width: 180px;}
+</style>
+    <include file="Index:head"/>
+    <include file="Index:nav"/>
+    <div class="main-container" id="main-container">
+        <include file="Index:menu"/>
+        <div class="main-content">
+            <!-- <div style="clear: both;"></div> -->
+            <include file="Index:title"/>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="form-horizontal user_form" role="form">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 模块</label>
+
+                                <div class="col-sm-9">
+                                    <input type="text" id="form-field-1" placeholder="model" class="col-sm-5" name="model">
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 控制器</label>
+
+                                <div class="col-sm-9">
+                                    <input type="text" id="form-field-2" placeholder="controller" class="col-sm-5" name="controller">
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 方法</label>
+
+                                <div class="col-sm-9">
+                                    <input type="text" id="form-field-3" placeholder="action" class="col-sm-5" name="action">
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 用户id</label>
+
+                                <div class="col-sm-9">
+                                    <input type="text" id="form-field-4" placeholder="uid" class="col-sm-5" name="uid">
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 日志内容</label>
+
+                                <div class="col-sm-9">
+                                    <input type="text" id="form-field-6" placeholder="log" class="col-sm-5" name="log">
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 时间</label>
+
+                                <div class="col-sm-9">
+                                    <input type="date" id="form-field-5" placeholder="create_time" class="col-sm-5" name="create_time">
+                                </div>
+
+                            </div>
+                        </div><!--表单组-->
+                        <div class="clearfix form-actions">
+                            <div class="col-md-offset-3 col-md-9">
+                                <button class="btn btn-info" type="button" id="log">
+                                    <i class="icon-ok bigger-110"></i>
+                                    查询日志
+                                </button>
+                                <button class="btn btn-danger" type="button" id="del">
+                                    <i class="icon-fire bigger-110"></i>
+                                    删除日志
+                                </button>
+                            </div>
+                        </div>
+                    </div><!--col-xs-12-->
+                    <div class="col-xs-12" id="pagetable">
+
+                    </div>
+                </div><!--row-->
+            </div><!--page-content-->
+            <include file="Index:setting"/>
+        </div>
+    </div>
+    <include file="Index:footer"/>
+    <!--自己的js代码引入-->
+    <script type="text/javascript">
+        window.onload = function () {
+            var url = app+"/admin/Log/getLog";
+            var json = getUrlJson();
+            if($.isEmptyObject(json)){
+                json.model = "home";
+            }
+            console.log(json);
+            page(url,json);
+            log(url);
+        };
+        enter($("#log"));
+        function log(url) {
+            $("#log").click(function () {
+                var model = $("[name=model]").val();
+                var controller = $("[name=controller]").val();
+                var action = $("[name=action]").val();
+                var uid = $("[name=uid]").val();
+                var log = $("[name=log]").val();
+                var create_time = $("[name=create_time]").val();
+                var json = {};
+                if(model){
+                    json.model = model;
+                }
+                if(controller){
+                    json.controller = controller;
+                }
+                if(action){
+                    json.action = action;
+                }
+                if(uid){
+                    json.uid = uid;
+                }
+                if(log){
+                    json.log = log;
+                }
+                if(create_time){
+                    json.create_time = create_time;
+                }
+                page(url,json);
+            });
+
+            $("#del").click(function () {
+                var model = $("[name=model]").val();
+                var controller = $("[name=controller]").val();
+                var action = $("[name=action]").val();
+                var uid = $("[name=uid]").val();
+                var log = $("[name=log]").val();
+                var create_time = $("[name=create_time]").val();
+                var json = {};
+                if(model){
+                    json.model = model;
+                }
+                if(controller){
+                    json.controller = controller;
+                }
+                if(action){
+                    json.action = action;
+                }
+                if(uid){
+                    json.uid = uid;
+                }
+                if(log){
+                    json.log = log;
+                }
+                if(create_time){
+                    json.create_time = create_time;
+                }
+                var url_del = app + "/admin/log/delLog";
+                $.post(url_del,json,function (res) {
+                    if(res.status){
+                        return dialog.success(res.info,function () {
+                           location.reload();
+                        });
+                    }
+                    return dialog.error(res.info);
+                });
+            });
+        }
+    </script>
+</html>

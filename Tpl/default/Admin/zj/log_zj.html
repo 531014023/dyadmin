@@ -1,0 +1,31 @@
+<div class="table-responsive">
+    <table class="col-xs-12 table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>uid</th>
+            <th data-name="model">模块</th>
+            <th data-name="controller">控制器</th>
+            <th data-name="action">操作</th>
+            <th data-name="action_type">访问类型</th>
+            <th>时间</th>
+            <th>log</th>
+        </tr>
+        </thead>
+        <tbody>
+        <foreach name="list" item="l">
+            <tr>
+                <td><{$l.uid}></td>
+                <td><{$l.model}></td>
+                <td><{$l.controller}></td>
+                <td><{$l.action}></td>
+                <td><{$l.action_type}></td>
+                <td><{$l.create_time}></td>
+                <td style="text-align: left;"><{$l.log}></td>
+            </tr>
+        </foreach>
+        </tbody>
+    </table>
+</div>
+<div class="col-xs-12 status">
+    <{$show}>
+</div>

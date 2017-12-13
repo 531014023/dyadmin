@@ -1,31 +1,35 @@
 <?php
 return array(
-    //*********************************附加设置***********************************
-    'SHOW_PAGE_TRACE'       =>  false,                        //关闭Trace信息
-    //'TAGLIB_BUILD_IN'       =>  'Cx,Common\Tag\My',           //加载自定义标签
-    'LOAD_EXT_CONFIG'       =>  'db',         //加载网站设置文件
-    'TMPL_PARSE_STRING'     =>  array(                        //定义常用路径
-        '__HOME_CSS__'      =>  __ROOT__.trim(TMPL_PATH,'.').'Home/Public/css',
-        '__HOME_JS__'       =>  __ROOT__.trim(TMPL_PATH,'.').'Home/Public/js',
-        '__HOME_IMAGE__'    =>  __ROOT__.trim(TMPL_PATH,'.').'Home/Public/image',
-        '__ADMIN_CSS__'     =>  __ROOT__.trim(TMPL_PATH,'.').'Admin/Public/css',
-        '__ADMIN_JS__'      =>  __ROOT__.trim(TMPL_PATH,'.').'Admin/Public/js',
-        '__ADMIN_IMAGE__'   =>  __ROOT__.trim(TMPL_PATH,'.').'Admin/Public/image',
-        '__PUBLIC__'        => __ROOT__."/Public"
+    //'配置项'=>'配置值'
+    // 加载扩展配置文件
+    'LOAD_EXT_CONFIG' => 'db',
+    'SESSION_AUTO_START'    =>      false,//默认不开启session(APP接口需用url传递sid)
+    'URL_CASE_INSENSITIVE'  =>  true,//url不区分大小写
+    'DEFAULT_FILTER'        => 'strip_tags',//默认参数过滤方法
+    'TMPL_L_DELIM' => '<{',
+    'TMPL_R_DELIM' => '}>',
+    "URL_MODEL" => 2,
+    'SHOW_PAGE_TRACE' => false,
+//    'URL_MODULE_MAP'    =>    array('enjoy'=>'admin'),//模块映射
+    'DB_SQL_BUILD_CACHE' => true,//sql解析缓存
+    'DB_SQL_BUILD_LENGTH' => 20, // SQL缓存的队列长度
+    'TMPL_PARSE_STRING'  =>array(
+        '__PUBLIC__' => '/dyadmin/Public', // 更改默认的/Public 替换规则
+        '__ADMIN_PUBLIC__' => '/dyadmin/Public/Admin', // 更改默认的/Public 替换规则
+        '__ADMIN_JS__'     => '/dyadmin/Public/Admin/js', // 增加新的JS类库路径替换规则
+        '__JS__'     => '/dyadmin/Public/static/js', // 增加新的JS类库路径替换规则
+        '__UPLOAD__' => '/dyadmin/Upload', // 增加新的上传路径替换规则)
     ),
-//***********************************URL设置*********************************
-    'MODULE_ALLOW_LIST'     =>  array('Home','Admin','Common'),  //允许访问列表
-    //'TMPL_EXCEPTION_FILE'   =>  APP_DEBUG ? THINK_PATH.'Tpl/think_exception.tpl' : './Template/default/Home/Public/404.html',                                    //404设置
-//***********************************SESSION设置*****************************
-    'SESSION_OPTIONS'       =>  array(
-        'name'              =>  'DYSESSION',                 //设置session名
-        'expire'            =>  60*60*2,                     //SESSION保存2小时
-        'use_trans_sid'     =>  1,                            //跨页传递
-        'use_only_cookies'  =>  0,                            //是否只开启基于cookies的session的会话方式
-    ),
-//***********************************URL*************************************
-    'URL_MODEL'             =>  2,                            // 为了兼容性更好而设置成1 如果确认服务器开启了mod_rewrite 请设置为 2
-    'URL_CASE_INSENSITIVE'  =>  false,                        // 区分url大小写
-//***********************************其他设置*********************************
-    'THINK_INFORMATION'     =>  '1.0',                        // 版本
+    // 设置禁止访问的模块列表
+    'MODULE_DENY_LIST'      =>  array('Common',"Index"),
+    'LOG_RECORD' => true, // 开启日志记录
+    'LOG_LEVEL'  =>'EMERG,ALERT,CRIT,ERR,WARN,SQL,INFO,DEBUG', // 只记录EMERG ALERT
+
+    //==============================缓存配置==============================================
+//    'DATA_CACHE_TYPE'=>'Redis',//缓存类型
+    'IS_CACHE'=>false,//是否缓存开关
+    'CACHE_EXP'=>200,//默认缓存时长
+    //==============================日志设置========================================
+    'LOG_TABLE'=>'dy_log',//日志表
+    'LOG_TYPE'=>'Db',//日志记录方式
 );

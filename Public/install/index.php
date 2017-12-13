@@ -45,7 +45,7 @@ if(@$_GET['c']=='success'){
         }
         // 导入sql数据并创建表
         $dystr=file_get_contents('./dy.sql');
-        $sql_array=preg_split("/;[\r\n]+/", str_replace('bjy_',$data['DB_PREFIX'],$dystr));
+        $sql_array=preg_split("/;[\r\n]+/", str_replace('wy_',$data['DB_PREFIX'],$dystr));
         foreach ($sql_array as $k => $v) {
             if (!empty($v)) {
                 $link->query($v);

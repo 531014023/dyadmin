@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+	/*.main-content{
+		background: url("../../../Public/background/lw.jpg");
+		background-repeat: no-repeat;
+		background-size: 100% 100%;
+	}*/
+	#upload_img object{height: 140px;width: 180px;}
+</style>
+<include file="Index:head"/>
+	<div class="main-container" id="main-container">
+		<div class="main-content" style="margin-left: 0;">
+			<div style="clear: both;margin-top: 50px;"></div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-horizontal user_form" role="form" id="uid">
+							<div class="form-group">
+								<label class="col-sm-3 control-label no-padding-right" for="form-field-1">  <span style="color: red;">*(必填)</span>
+									 菜单名称</label>
+								
+								<div class="col-sm-9">
+									<input type="text" id="form-field-1" placeholder="菜单名" class="col-xs-10 col-sm-5" name="name" value="<{$info.name}>">
+								</div>
+							
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 上级菜单 </label>
+
+								<div class="col-sm-2">
+									<select class="width-90 chosen-select" data-placeholder="没有可选择的商品" style="display: none;" id="menu">
+										<option value="0"
+										<php>
+											if($info['pid'] == 0)
+											echo 'selected';
+										</php>
+										>顶级菜单</option>
+										<foreach name="menu" item="m">
+											<option value="<{$m.id}>"
+											<php>
+												if($info['pid'] == $m['id'])
+												echo 'selected';
+											</php>
+											><{$m.name}></option>
+										</foreach>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 菜单图标 </label>
+
+								<div class="col-sm-9">
+									<input type="text" id="form-field-2" placeholder="一级菜单需配置" class="col-xs-10 col-sm-5" name="icon" value="<{$info.icon}>">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 链接 </label>
+
+								<div class="col-sm-9">
+									<input type="text" id="form-field-3" placeholder="示例:/enjoy/index/index.html"" class="col-xs-10 col-sm-5" name="href" value="<{$info.href}>">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 排序 </label>
+
+								<div class="col-sm-9">
+									<input type="text" id="form-field-4" placeholder="数字越小越靠前" class="col-xs-10 col-sm-5" name="sort" value="<{$info.sort}>">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 是否启用 </label>
+
+								<div class="col-sm-9">
+									<div class="checkbox">
+										<label>
+											<input class="ace ace-switch ace-switch-6" type="checkbox" name="use_status"
+											<php>
+												if($info['use_status'])
+												echo "checked";
+											</php>
+											>
+											<span class="lbl"></span>
+										</label>
+									</div>
+								</div>
+							</div>
+						</div><!--表单组-->
+						<div class="clearfix form-actions">
+							<div class="col-sm-offset-3 col-sm-9">
+								<button name="<{$info.id}>" class="btn btn-success updateuser" type="button" id="update">
+									<i class="icon-pencil bigger-110"></i>
+									修改
+								</button>
+								<button name="<{$info.id}>" class="btn btn-danger updateuser" type="button" id="delete"
+								style="display:none;
+								<php>
+									if($root == 0)
+									echo 'none;'
+								</php>
+								"
+								>
+									<i class="icon-trash bigger-110"></i>
+									删除
+								</button>
+							</div>
+						</div>
+					</div><!--col-xs-12-->
+				</div><!--row-->
+			</div><!--page-content-->
+			<include file="Index:setting"/>
+		</div>
+	</div>
+<include file="Index:footer"/>
+<!--自己的js代码引入-->
+		<script type="text/javascript">
+			$("#update").click(function () {
+				var json = {};
+				json.name = $("[name=name]").val();
+				json.icon = $("[name=icon]").val();
+				json.href = $("[name=href]").val();
+				json.menu = $("#menu").val();
+				json.sort = $("[name=sort]").val();
+				json.id = $(this).attr("name");
+				json.use_status = $("[name=use_status]").is(":checked")?1:0;
+				var url = app_admin+"/menu/updateMenu";
+				$.post(url,json,function (res) {
+					console.log(res.data);
+					if(res.status){
+						return dialog.success(res.info,function () {
+							var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+							parent.location.reload();
+							parent.layer.close(index); //再执行关闭
+						});
+					}else{
+						return dialog.error(res.info);
+					}
+				});
+			});
+
+			$("#delete").click(function () {
+				var json = {};
+				json.id = $(this).attr("name");
+				dialog.confirm("删除菜单后无法恢复!您真的要删除此菜单吗?",function () {
+					var url = app_admin+"/menu/delMenu";
+					$.post(url,json,function (res) {
+						if(res.status){
+							return dialog.success(res.info,function () {
+								var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+								parent.location.reload();
+								parent.layer.close(index); //再执行关闭
+							});
+						}else{
+							return dialog.error(res.info);
+						}
+					});
+				});
+			});
+			enter();
+
+			$("#menu").on("change",function () {
+				var menu_id = $(this).val();
+				if(menu_id != 0){
+					//不允许填写图标
+					$("[name=icon]").attr("readonly",true);
+				}else{
+					$("[name=icon]").removeAttr("readonly");
+				}
+			});
+		</script>
+</html>
