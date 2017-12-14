@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+	/*.main-content{
+		background: url("../../../Public/background/lw.jpg");
+		background-repeat: no-repeat;
+		background-size: 100% 100%;
+	}*/
+</style>
+<include file="Index:head"/>
+	<include file="Index:nav"/>
+	<div class="main-container" id="main-container">
+		<include file="Index:menu"/>
+		<div class="main-content" style="height: 591px;">
+			<!--<div style="clear: both;margin-top: 50px;"></div>-->
+			<include file="Index:title"/>
+			<div class="row">
+				<!--所有页面内容均在此处!-->
+				<div class="col-xs-12 form-group">
+					<div class="col-sm-5">
+						<button class="btn btn-primary " type="button" id="addAdmin">
+							<i class="icon-ok bigger-110"></i>
+							添加管理员
+						</button>
+					</div>
+				</div><!--col-xs-12-->
+				<div class="col-xs-12" id="pagetable">
+
+				</div>
+			</div>
+			<include file="Index:setting"/>
+		</div>
+	</div>
+<include file="Index:footer"/>
+<script type="text/javascript">
+	var admin_list_url = root+"/admin/admin/getAdminList";
+	page(admin_list_url);
+	$("#addAdmin").click(function () {
+		layer.open({
+			type: 2,
+			title:'添加管理员',
+			area: ['50%', '70%'],
+			fixed: false, //不固定
+			maxmin: true,
+			content: '__ROOT__/admin/admin/addAdmin.html'
+		});
+	});
+	function updateAdmin(admin_id) {
+		layer.open({
+			type: 2,
+			title:'编辑管理员',
+			area: ['50%', '70%'],
+			fixed: false, //不固定
+			maxmin: true,
+			content: '__ROOT__/admin/admin/addAdmin.html?admin_id='+admin_id
+		});
+	}
+</script>
+</html>

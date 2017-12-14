@@ -1,0 +1,46 @@
+<div class="table-responsive">
+    <table class="col-xs-12 table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>用户名</th>
+            <th>登录次数</th>
+            <th>最后登录时间</th>
+            <th>最后登录ip</th>
+            <th>是否是超级管理员</th>
+            <th>权限列表</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <foreach name="list" item="a">
+            <tr name="<{$a.id}>">
+                <td><{$a.username}></td>
+                <td><{$a.login_count}></td>
+                <td><{$a.login_time}></td>
+                <td><{$a.ip}></td>
+                <td><?php
+                    if($a['root'])
+                    echo "<span class='label label-primary arrowed-in-right arrowed'>是</span>";
+                    else
+                    echo "<span class=\"label label-warning\">
+                    <i class=\"icon-warning-sign bigger-120\"></i>
+                    否
+                    </span>";
+                ?></td>
+                <td><{$a.auth}></td>
+                <td>
+                    <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+                        <a class="red" href="javascript:updateAdmin(<{$a.id}>)">
+                            <i class="icon-pencil bigger-130"></i>
+                            编辑
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        </foreach>
+        </tbody>
+    </table>
+</div>
+<div class="col-xs-12 status">
+    <{$show}>
+</div>

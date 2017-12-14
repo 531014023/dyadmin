@@ -21,8 +21,7 @@
 
 		<!-- page specific plugin styles -->
 		<link rel="stylesheet" href="/dyadmin/Public/Admin/assets/css/chosen.css">
-		<link rel="stylesheet" href="/dyadmin/Public/Admin/assets/css/colorpicker.css">
-		<link rel="stylesheet" href="/dyadmin/Public/Admin/assets/css/chosen.css">
+		<!--<link rel="stylesheet" href="/dyadmin/Public/Admin/assets/css/colorpicker.css">-->
 		<link rel="stylesheet" href="/dyadmin/Public/Admin/css/common.css">
 		<!-- fonts -->
 
@@ -31,8 +30,8 @@
 		<!-- ace styles -->
 
 		<link rel="stylesheet" href="/dyadmin/Public/Admin/assets/css/ace.min.css" />
-		<link rel="stylesheet" href="/dyadmin/Public/Admin/assets/css/ace-rtl.min.css" />
-		<link rel="stylesheet" href="/dyadmin/Public/Admin/assets/css/ace-skins.min.css" />
+		<!--<link rel="stylesheet" href="/dyadmin/Public/Admin/assets/css/ace-rtl.min.css" />-->
+		<!--<link rel="stylesheet" href="/dyadmin/Public/Admin/assets/css/ace-skins.min.css" />-->
 
 		<!--[if lte IE 8]>
 		  <link rel="stylesheet" href="/dyadmin/Public/Admin/assets/css/ace-ie.min.css" />
@@ -42,7 +41,7 @@
 
 		<!-- ace settings handler -->
 
-		<script src="/dyadmin/Public/Admin/assets/js/ace-extra.min.js"></script>
+		<!--<script src="/dyadmin/Public/Admin/assets/js/ace-extra.min.js"></script>-->
 
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
@@ -50,11 +49,6 @@
 		<script src="/dyadmin/Public/Admin/assets/js/html5shiv.js"></script>
 		<script src="/dyadmin/Public/Admin/assets/js/respond.min.js"></script>
 		<![endif]-->
-		<style type="text/css">
-			#loading{position: absolute;width: 100%;height:100%;top: 0;
-				left:0;background-color: rgba(0,0,0,0.0);z-index: 999;}
-			#loading img{position: fixed;transform: translateX(-50%) translateY(-50%);top: 50%;left: 50%;}
-		</style>
 </head>
 	<div class="navbar navbar-default" id="navbar">
 		<script type="text/javascript">
@@ -331,6 +325,7 @@
 	</div>
 		<script type="text/javascript">
 			var root = "/dyadmin";
+			var app = "/dyadmin";
 		</script>
 		<!-- basic scripts -->
 
@@ -355,34 +350,34 @@
 		<![endif]-->
 
 		<script type="text/javascript">
-			if("ontouchend" in document) document.write("<script src='/dyadmin/Public/Admin/assets/js/jquery.mobile.custom.min.js'>"+"<"+"script>");
+//			if("ontouchend" in document) document.write("<script src='/dyadmin/Public/Admin/assets/js/jquery.mobile.custom.min.js'>"+"<"+"script>");
 		</script>
 		<script src="/dyadmin/Public/Admin/assets/js/bootstrap.min.js"></script>
-		<script src="/dyadmin/Public/Admin/assets/js/typeahead-bs2.min.js"></script>
+		<!--<script src="/dyadmin/Public/Admin/assets/js/typeahead-bs2.min.js"></script>-->
 
 		<!-- page specific plugin scripts -->
-		<script src="/dyadmin/Public/Admin/assets/js/jquery.dataTables.min.js"></script>
-		<script src="/dyadmin/Public/Admin/assets/js/jquery.dataTables.bootstrap.js"></script>
+		<!--<script src="/dyadmin/Public/Admin/assets/js/jquery.dataTables.min.js"></script>-->
+		<!--<script src="/dyadmin/Public/Admin/assets/js/jquery.dataTables.bootstrap.js"></script>-->
 		<script src="/dyadmin/Public/Admin/assets/js/chosen.jquery.min.js"></script>
 		<script type="text/javascript" src="/dyadmin/Public/static/js/dialog/layer.js"></script>
 		<script type="text/javascript" src="/dyadmin/Public/static/js/dialog.js"></script>
 		<script type="text/javascript" src="/dyadmin/Public/static/js/fun.js"></script>
 		<!--[if lte IE 8]>
-		  <script src="/dyadmin/Public/Admin/assets/js/excanvas.min.js"></script>
+		  <!--<script src="/dyadmin/Public/Admin/assets/js/excanvas.min.js"></script>-->
 		<![endif]-->
 
-		<script src="/dyadmin/Public/Admin/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
-		<script src="/dyadmin/Public/Admin/assets/js/jquery.ui.touch-punch.min.js"></script>
-		<script src="/dyadmin/Public/Admin/assets/js/jquery.slimscroll.min.js"></script>
-		<script src="/dyadmin/Public/Admin/assets/js/jquery.easy-pie-chart.min.js"></script>
-		<script src="/dyadmin/Public/Admin/assets/js/jquery.sparkline.min.js"></script>
-		<script src="/dyadmin/Public/Admin/assets/js/flot/jquery.flot.min.js"></script>
-		<script src="/dyadmin/Public/Admin/assets/js/flot/jquery.flot.pie.min.js"></script>
-		<script src="/dyadmin/Public/Admin/assets/js/flot/jquery.flot.resize.min.js"></script>
+		<!--<script src="/dyadmin/Public/Admin/assets/js/jquery-ui-1.10.3.custom.min.js"></script>-->
+		<!--<script src="/dyadmin/Public/Admin/assets/js/jquery.ui.touch-punch.min.js"></script>-->
+		<!--<script src="/dyadmin/Public/Admin/assets/js/jquery.slimscroll.min.js"></script>-->
+		<!--<script src="/dyadmin/Public/Admin/assets/js/jquery.easy-pie-chart.min.js"></script>-->
+		<!--<script src="/dyadmin/Public/Admin/assets/js/jquery.sparkline.min.js"></script>-->
+		<!--<script src="/dyadmin/Public/Admin/assets/js/flot/jquery.flot.min.js"></script>-->
+		<!--<script src="/dyadmin/Public/Admin/assets/js/flot/jquery.flot.pie.min.js"></script>-->
+		<!--<script src="/dyadmin/Public/Admin/assets/js/flot/jquery.flot.resize.min.js"></script>-->
 
 		<!-- ace scripts -->
 
-		<script src="/dyadmin/Public/Admin/assets/js/ace-elements.min.js"></script>
+		<!--<script src="/dyadmin/Public/Admin/assets/js/ace-elements.min.js"></script>-->
 		<script src="/dyadmin/Public/Admin/assets/js/ace.min.js"></script>
 
 		<!-- inline scripts related to this page -->

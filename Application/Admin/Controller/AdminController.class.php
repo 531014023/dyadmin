@@ -120,7 +120,7 @@ class AdminController extends AdminbaseController
                 }
             }
             $this->assign("auth", $auth);
-            return $this->display("User:addAdmin");
+            return $this->display("Admin:addAdmin");
         }else{
             $username = I("username");
             $password = I("password");
@@ -175,7 +175,19 @@ class AdminController extends AdminbaseController
         return $this->getinfo(0,"请至少修改一样资料!");
     }
 
+    public function getAdmin()
+    {
+        return $this->display("Admin:getAdmin");
+    }
 
+    public function getAdminList()
+    {
+        $res = D("Admin")->get_admin_list([]);
+        $this->assign("list",$res['list']);
+        $this->assign("show",$res['show']);
+        $data = $this->fetch("zj:admin_zj");
+        return $this->getinfo(1,$res,$data);
+    }
 
 
 

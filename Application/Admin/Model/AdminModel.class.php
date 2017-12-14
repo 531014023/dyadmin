@@ -51,4 +51,23 @@ class AdminModel extends BaseModel
         }
         return $auth;
     }
+
+    /**
+     * 获取管理员列表
+     * @param $map
+     * @param string $order
+     * @param string $field
+     * @param bool $field_bool
+     * @return array
+     */
+    public function get_admin_list($map, $order="id asc", $field="*", $field_bool=false)
+    {
+        $p = I("p",1);
+        $pageCount = I("page",PAGECOUNT);
+        $count = $this->where($map)->count();
+        $page = new \Think\Page($count,$pageCount);
+        $show = $page->show();
+        $res = $this->field($field,$field_bool)->where($map)->page($p,$pageCount)->order($order)->select();
+        return ['list'=>$res,'show'=>$show];
+    }
 }
