@@ -125,6 +125,9 @@ class AdminController extends AdminbaseController
             $username = I("username");
             $password = I("password");
             $auth = json_decode(I("auth"),true);
+            if(!$username || !$password || !$auth){
+                return $this->getinfo(0,"参数不能为空");
+            }
             $admin = D("Admin");
             $info = $admin->where(["username"=>$username])->find();
             if($info){
@@ -150,7 +153,7 @@ class AdminController extends AdminbaseController
         $admin_id = I("admin_id");
         $password = I("password");
         $auth = json_decode(I("auth"),true);
-        if(!$admin_id){
+        if(!$admin_id || !$auth){
             return $this->getinfo(0,"参数错误");
         }
         $admin = D("Admin");

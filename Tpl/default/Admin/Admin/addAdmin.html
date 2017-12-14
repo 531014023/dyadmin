@@ -16,7 +16,7 @@
 					<div class="col-xs-12">
 						<div class="form-horizontal user_form" role="form" id="uid">
 							<div class="form-group">
-								<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 用户账号</label>
+								<label class="col-sm-3 control-label no-padding-right" for="form-field-1">  <span style="color: red;">*(必填)</span> 用户账号</label>
 								
 								<div class="col-sm-9">
 									<input type="text" id="form-field-1" placeholder="用户账号" class="col-xs-10 col-sm-5" name="username" value="<{$user.username}>">
@@ -24,14 +24,19 @@
 							
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 密码 </label>
+								<label class="col-sm-3 control-label no-padding-right" for="form-field-1">  <span style="color: red;">*(必填)</span> 密码 </label>
 
 								<div class="col-sm-9">
-									<input type="text" id="form-field-2" placeholder="密码" class="col-xs-10 col-sm-5" name="password">
+									<input type="text"
+										   <php>
+											   if($_GET['admin_id'])
+											   echo "readonly";
+										   </php>
+										   id="form-field-2" placeholder="密码" class="col-xs-10 col-sm-5" name="password">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 权限分配 </label>
+								<label class="col-sm-3 control-label no-padding-right" for="form-field-1">  <span style="color: red;">*(必填)</span> 权限分配 </label>
 
 								<div class="col-sm-8" id="auth">
 									<foreach name="auth" item="m">

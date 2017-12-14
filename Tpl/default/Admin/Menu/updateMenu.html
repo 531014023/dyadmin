@@ -165,5 +165,14 @@
 					$("[name=icon]").removeAttr("readonly");
 				}
 			});
+			window.onload = function () {
+				var menu_id = $("#menu").val();
+				if(menu_id != 0){
+					//不允许填写图标
+					$("[name=icon]").attr("readonly",true);
+				}else{
+					$("[name=icon]").removeAttr("readonly");
+				}
+			};
 		</script>
 </html>
