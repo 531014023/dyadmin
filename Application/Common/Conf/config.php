@@ -14,11 +14,10 @@ return array(
     'DB_SQL_BUILD_CACHE' => true,//sql解析缓存
     'DB_SQL_BUILD_LENGTH' => 20, // SQL缓存的队列长度
     'TMPL_PARSE_STRING'  =>array(
-        '__PUBLIC__' => '/dyadmin/Public', // 更改默认的/Public 替换规则
-        '__ADMIN_PUBLIC__' => '/dyadmin/Public/Admin', // 更改默认的/Public 替换规则
-        '__ADMIN_JS__'     => '/dyadmin/Public/Admin/js', // 增加新的JS类库路径替换规则
-        '__JS__'     => '/dyadmin/Public/static/js', // 增加新的JS类库路径替换规则
-        '__UPLOAD__' => '/dyadmin/Upload', // 增加新的上传路径替换规则)
+        '__ADMIN_PUBLIC__' => __ROOT__.'/Public/Admin', // 更改默认的/Public 替换规则
+        '__ADMIN_JS__'     => __ROOT__.'/Public/Admin/js', // 增加新的JS类库路径替换规则
+        '__JS__'     => __ROOT__.'/Public/static/js', // 增加新的JS类库路径替换规则
+        '__UPLOAD__' => __ROOT__.'/Upload', // 增加新的上传路径替换规则)
     ),
     // 设置禁止访问的模块列表
     'MODULE_DENY_LIST'      =>  array('Common',"Index"),

@@ -329,7 +329,9 @@
 			</div>
 		</div>
 	</div>
-
+		<script type="text/javascript">
+			var root = "/dyadmin";
+		</script>
 		<!-- basic scripts -->
 
 		<!--[if !IE]> -->

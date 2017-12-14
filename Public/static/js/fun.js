@@ -1,16 +1,14 @@
-var app = "/dyadmin";
-var app_admin = "/dyadmin/admin"
 
 function logout(){
 $('#logout').click(function(){
         $.ajax({
             type:'post',
-            url:app+'/admin/admin/logout',
+            url:root+'/admin/admin/logout',
             dasta:{},
             dataType:'json',
             success:function(data){
                 if(data.status == 1){
-                    var url=app+'/admin/index/login.html';
+                    var url=root+'/admin/index/login.html';
                     return dialog.success("退出成功",function () {
                         location.href = url;
                     });
@@ -222,7 +220,7 @@ function editor(obj,url,callback) {
     };
     var tbeditor =  function () {
         this.obj = $("table tr td");
-        this.url = app + "/updategoods";
+        this.url = root+"/updategoods";
         this.callback='';
         this.editor = function () {
             var callback = this.callback;

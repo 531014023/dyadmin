@@ -47,6 +47,10 @@ CREATE TABLE `wy_menu` (
   `use_status` int(2) NOT NULL DEFAULT '1' COMMENT '启用状态',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='后台菜单';
+INSERT INTO `dyadmin`.`dy_menu` (`id`, `name`, `icon`, `href`, `action`, `pid`, `sort`, `use_status`) VALUES ('1', '首页', 'icon-home', '/admin/index/index', 'index', '0', '1', '1');
+INSERT INTO `dyadmin`.`dy_menu` (`id`, `name`, `icon`, `href`, `action`, `pid`, `sort`, `use_status`) VALUES ('4', '导航菜单', '', '/admin/menu/getmenu', 'getmenu', '2', '0', '0');
+INSERT INTO `dyadmin`.`dy_menu` (`id`, `name`, `icon`, `href`, `action`, `pid`, `sort`, `use_status`) VALUES ('2', '系统管理', 'icon-cogs', '/admin/menu/getMenu', 'getMenu', '0', '2', '1');
+INSERT INTO `dyadmin`.`dy_menu` (`id`, `name`, `icon`, `href`, `action`, `pid`, `sort`, `use_status`) VALUES ('5', '日志管理', 'icon-file', '/admin/log/log', 'log', '0', '3', '1');
 
 -- ----------------------------
 -- Table structure for wy_log

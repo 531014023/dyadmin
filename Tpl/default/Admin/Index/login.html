@@ -90,7 +90,7 @@
 			var password=$('#password').val();
 			var username=$('#username').val();
 			// dialog.success(password);
-			var url = app+'/admin/admin/login';
+			var url = '__ROOT__/admin/admin/login';
 			var param = {
 				'password':password,
 				'username':username
@@ -98,7 +98,7 @@
 			$.post(url,param,function (res) {
 				// console.log(data);
 				if(res.status){
-					var url = app+'/admin/index/index.html';
+					var url = '__ROOT__/admin/index/index.html';
 					// console.log(123);
 					return dialog.success(res.info,function () {
 						location.href = url;

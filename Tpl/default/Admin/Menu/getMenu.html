@@ -38,7 +38,7 @@
     <include file="Index:footer"/>
     <!--自己的js代码引入-->
     <script type="text/javascript">
-        var urlquery = app+"/admin/Menu/menuList";
+        var urlquery = "__ROOT__/admin/Menu/menuList";
         page(urlquery);
         $("#addMenu").click(function () {
             layer.open({
@@ -47,7 +47,7 @@
                 area: ['40%', '50%'],
                 fixed: false, //不固定
                 maxmin: true,
-                content: app_admin+'/menu/addmenu.html'
+                content: '__ROOT__/admin/menu/addmenu.html'
             });
 //           location.href = "https://wy.zetaluoxin.cn/enjoy/menu/addmenu.html";
         });
@@ -61,7 +61,7 @@
                 area:['40%','50%'],
                 fixed: false, //不固定
                 maxmin: true,
-                content: app_admin+'/menu/updateMenu.html?menu_id='+obj
+                content: '__ROOT__/admin/menu/updateMenu.html?menu_id='+obj
             });
         }
     </script>

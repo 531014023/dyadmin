@@ -81,7 +81,6 @@
 					</div><!--col-xs-12-->
 				</div><!--row-->
 			</div><!--page-content-->
-			<include file="Index:setting"/>
 		</div>
 	</div>
 <include file="Index:footer"/>
@@ -95,7 +94,7 @@
 				json.menu = $("#menu").val();
 				json.sort = $("[name=sort]").val();
 				json.use_status = $("[name=use_status]").is(":checked")?1:0;
-				var url = app_admin+"/menu/addMenu";
+				var url = "__ROOT__/admin/menu/addMenu";
 				$.post(url,json,function (res) {
 					if(res.status){
 						return dialog.success(res.info,function () {

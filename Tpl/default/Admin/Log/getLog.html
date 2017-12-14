@@ -92,7 +92,7 @@
     <!--自己的js代码引入-->
     <script type="text/javascript">
         window.onload = function () {
-            var url = app+"/admin/Log/getLog";
+            var url = "__ROOT__/admin/Log/getLog";
             var json = getUrlJson();
             if($.isEmptyObject(json)){
                 json.model = "home";
@@ -158,7 +158,7 @@
                 if(create_time){
                     json.create_time = create_time;
                 }
-                var url_del = app + "/admin/log/delLog";
+                var url_del = "__ROOT__/admin/log/delLog";
                 $.post(url_del,json,function (res) {
                     if(res.status){
                         return dialog.success(res.info,function () {

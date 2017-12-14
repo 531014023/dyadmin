@@ -107,7 +107,6 @@
 					</div><!--col-xs-12-->
 				</div><!--row-->
 			</div><!--page-content-->
-			<include file="Index:setting"/>
 		</div>
 	</div>
 <include file="Index:footer"/>
@@ -122,7 +121,7 @@
 				json.sort = $("[name=sort]").val();
 				json.id = $(this).attr("name");
 				json.use_status = $("[name=use_status]").is(":checked")?1:0;
-				var url = app_admin+"/menu/updateMenu";
+				var url = "__ROOT__/admin/menu/updateMenu";
 				$.post(url,json,function (res) {
 					console.log(res.data);
 					if(res.status){
@@ -141,7 +140,7 @@
 				var json = {};
 				json.id = $(this).attr("name");
 				dialog.confirm("删除菜单后无法恢复!您真的要删除此菜单吗?",function () {
-					var url = app_admin+"/menu/delMenu";
+					var url = "__ROOT__/admin/menu/delMenu";
 					$.post(url,json,function (res) {
 						if(res.status){
 							return dialog.success(res.info,function () {
