@@ -53,4 +53,9 @@ class AdminbaseController extends BaseController
         $this->assign("admin_name",C("admin_name"));
         $this->assign("company",C("company"));
     }
+
+    public function _empty()
+    {
+        $this->error("不存在此方法,请先添加此方法后再试!");
+    }
 }
