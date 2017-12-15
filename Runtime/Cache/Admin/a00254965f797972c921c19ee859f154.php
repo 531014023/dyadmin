@@ -14,6 +14,7 @@
 	<!-- basic styles -->
 		<link href="/dyadmin/Public/Admin/assets/css/bootstrap.min.css" rel="stylesheet" />
 		<link rel="stylesheet" href="/dyadmin/Public/Admin/assets/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="http://at.alicdn.com/t/font_510176_933r191gc4i2uik9.css" />
 
 		<!--[if IE 7]>
 		  <link rel="stylesheet" href="/dyadmin/Public/Admin/assets/css/font-awesome-ie7.min.css" />
@@ -30,8 +31,8 @@
 		<!-- ace styles -->
 
 		<link rel="stylesheet" href="/dyadmin/Public/Admin/assets/css/ace.min.css" />
-		<!--<link rel="stylesheet" href="/dyadmin/Public/Admin/assets/css/ace-rtl.min.css" />-->
-		<!--<link rel="stylesheet" href="/dyadmin/Public/Admin/assets/css/ace-skins.min.css" />-->
+		<link rel="stylesheet" href="/dyadmin/Public/Admin/assets/css/ace-rtl.min.css" />
+		<link rel="stylesheet" href="/dyadmin/Public/Admin/assets/css/ace-skins.min.css" />
 
 		<!--[if lte IE 8]>
 		  <link rel="stylesheet" href="/dyadmin/Public/Admin/assets/css/ace-ie.min.css" />
@@ -377,7 +378,7 @@
 
 		<!-- ace scripts -->
 
-		<!--<script src="/dyadmin/Public/Admin/assets/js/ace-elements.min.js"></script>-->
+		<script src="/dyadmin/Public/Admin/assets/js/ace-elements.min.js"></script>
 		<script src="/dyadmin/Public/Admin/assets/js/ace.min.js"></script>
 
 		<!-- inline scripts related to this page -->
