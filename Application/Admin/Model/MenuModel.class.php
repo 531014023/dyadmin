@@ -78,9 +78,10 @@ class MenuModel extends BaseModel
                     $menu[$k]['show'] = "display:block;";
                 }
                 if(strtolower(ACTION_NAME) == strtolower($v['action'])){
-                    $menu[$k]['open'] = "active";
+                    $menu[$k]['open'] = "active layui-this";
                 }
                 $menu[$k]['down'] = "";
+                $menu[$k]['child'] = "";
                 if($v['href']){
                     $menu[$k]['href'] = U($v['href']);
                 }
@@ -101,22 +102,24 @@ class MenuModel extends BaseModel
                     }
                     $menu[$k]['menu'][$key]["open"] = "";
                     if (strtolower(ACTION_NAME) == strtolower($val['action'])) {
-                        $menu[$k]['open'] = "active open";
+                        $menu[$k]['open'] = "active open layui-nav-itemed";
                         $menu[$k]['display'] = "display:block;";
-                        $menu[$k]['menu'][$key]["open"] = "active";
+                        $menu[$k]['menu'][$key]["open"] = "active layui-this";
                     }
                     if($val['href']){
                         $menu[$k]['menu'][$key]['href'] = U($val['href']);
                     }
                 }
                 if ($count == count($v['menu'])) {
+                    //没有该一级菜单下的权限时隐藏一级菜单
                     $menu[$k]['show'] = "display:none;";
                 } else {
                     $menu[$k]['show'] = "display:block;";
                 }
-                $menu[$k]['href'] = "#";
+                $menu[$k]['href'] = "javascript:;";
                 $menu[$k]['b'] = "<b class=\"arrow icon-angle-down\"></b>";
                 $menu[$k]['down'] = "dropdown-toggle";
+                $menu[$k]['child'] = "layui-nav-child";
             }
         }
         return ["menu"=>$menu,"title"=>$title];
@@ -161,6 +164,9 @@ class MenuModel extends BaseModel
         }
         if($map['pid']){
             $map['icon'] = '';
+        }
+        if($map['sort'] == ''){
+            $map['sort'] = 0;
         }
         $action = explode("/",explode(".",$map['href'])[0]);
         $map['action'] = $action[count($action)-1];

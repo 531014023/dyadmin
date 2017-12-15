@@ -1,0 +1,50 @@
+<script type="text/javascript">
+    var root = "__ROOT__";
+    var app = "__APP__";
+</script>
+<script src="__PUBLIC__/Admin/Js/jquery.js"></script>
+<script src="__PUBLIC__/static/layui/layui.all.js"></script>
+<script type="text/javascript" src="__PUBLIC__/static/js/dialog/layer.js"></script>
+<script type="text/javascript" src="__PUBLIC__/static/js/dialog.js"></script>
+<script type="text/javascript" src="__PUBLIC__/static/js/fun.js"></script>
+<script>
+    //JavaScript代码区域
+    layui.use('element', function(){
+        var element = layui.element;
+        element.on("nav(demo)",function (ele) {
+            var title = ele.find("a").text();
+            var url = ele.find("a").attr("_href");
+            //地址已经打开直接切换选项卡
+            for (var i = 0;i<$(".dy-iframe").length;i++){
+                var dy_src = $(".dy-iframe").eq(i).attr("src");
+                if(dy_src.toLowerCase() == url.toLowerCase()){
+                    element.tabChange("title",i+1);
+                    return ;
+                }
+            }
+            //地址为打开
+            var len = $('.layui-tab-title li').length;
+            if(len==1){
+                $('[lay-filter=title]').attr("lay-allowClose",true);
+            }
+            var res = element.tabAdd("title",{
+                title:title,
+                content:'<iframe frameborder="0" src="'+url+'" class="dy-iframe"></iframe>',
+                id:$('.layui-tab-title li').length+1
+            });
+            element.tabChange('title', $('.layui-tab-title li').length);
+            $('.layui-tab-title li').eq(0).find('i').remove();
+        });
+
+        element.on('tabDelete(title)', function(data){
+            $('[lay-filter=title]').removeAttr("lay-allowClose");
+            $('.layui-tab-title li').eq(0).find('i').remove();
+        });
+    });
+
+    //导航的hover效果、二级菜单等功能，需要依赖element模块
+    // 侧边栏点击隐藏兄弟元素
+    $('.layui-nav-item').click(function(event) {
+        $(this).siblings().removeClass('layui-nav-itemed');
+    });
+</script>

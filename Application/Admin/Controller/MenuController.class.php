@@ -71,7 +71,7 @@ class MenuController extends AdminbaseController
         if(IS_GET){
             $menu_id = I("menu_id");
             $menuInfo = $menu->find($menu_id);
-            $info = $menu->get_data("select", ["pid" => 0,"use_status"=>1]);
+            $info = $menu->get_data("select", ["pid" => 0,"use_status"=>1,"id"=>["NEQ",$menu_id]]);
             $this->assign("menu", $info);
             $this->assign("info",$menuInfo);
             $this->assign("root",session(admin.".root"));

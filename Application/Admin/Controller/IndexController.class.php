@@ -9,7 +9,20 @@ class IndexController extends AdminbaseController {
         $this->assign("server",$_SERVER);
         $this->display();
     }
+
+    public function layer_index(){
+        $this->assign("admin",session(admin));
+        $_SERVER['SERVER_IP'] = gethostbyname($_SERVER['SERVER_NAME']);
+        $this->assign("server",$_SERVER);
+        $this->display("layer:index");
+    }
     public function login(){
         $this->display();
+    }
+
+    public function layer()
+    {
+//        $this->display();
+        $this->display("layer:base");
     }
 }
