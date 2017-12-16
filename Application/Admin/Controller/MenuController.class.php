@@ -16,7 +16,7 @@ class MenuController extends AdminbaseController
      */
     public function getMenu()
     {
-        return $this->display("Menu:getMenu");
+        return $this->display("layer_menu:getMenu");
     }
 
     /**
@@ -30,6 +30,18 @@ class MenuController extends AdminbaseController
         $this->assign("show",$res['show']);
         $data = $this->fetch("zj:menu_zj");
         return $this->getinfo(1,"查询成功",$data);
+    }
+
+    /**
+     * 菜单列表
+     */
+    public function getMenuList()
+    {
+        $menu = D("Menu");
+        $res = $menu->getMenuList();
+        $res['status'] = 1;
+        $res['info'] = "查询成功";
+        $this->ajaxReturn($res);
     }
 
     /**

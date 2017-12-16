@@ -148,6 +148,27 @@ class MenuModel extends BaseModel
     }
 
     /**
+     * 获取菜单列表
+     * @return array
+     */
+    public function getMenuList()
+    {
+        $map['pid'] = 0;
+        $p = I("p",1);
+        $pageCount = I("page",5);
+        $count = $this->where($map)->count();
+        //得到一级菜单
+        $map['pid'] = 0;
+        $menu = $this->where($map)->page($p,$pageCount)->order("sort asc,id asc")->select();
+        foreach ($menu as $k=>$v){
+            $where['pid'] = $v['id'];
+            $res = $this->where($where)->order("sort asc,id asc")->select();
+            array_splice($menu,$k+1,0,$res);
+        }
+        return ["data"=>$menu,"count"=>$count];
+    }
+
+    /**
      * 添加菜单参数检查
      * @param $map
      * @return bool

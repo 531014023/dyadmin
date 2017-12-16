@@ -14,7 +14,7 @@
 	<!-- basic styles -->
 		<link href="/dyadmin/Public/Admin/assets/css/bootstrap.min.css" rel="stylesheet" />
 		<link rel="stylesheet" href="/dyadmin/Public/Admin/assets/css/font-awesome.min.css" />
-		<link rel="stylesheet" href="http://at.alicdn.com/t/font_510176_933r191gc4i2uik9.css" />
+		<link rel="stylesheet" href="http:////at.alicdn.com/t/font_510176_ozamlp3jycmu0udi.css" />
 
 		<!--[if IE 7]>
 		  <link rel="stylesheet" href="/dyadmin/Public/Admin/assets/css/font-awesome-ie7.min.css" />

@@ -20,14 +20,14 @@
 
             <foreach name="menu" item="m">
                 <li class="layui-nav-item <{$m.open}>" style="<{$m.show}>">
-                    <a class="" href="javascript:;" _href="<{$m.href}>">
+                    <a class="" href="javascript:;" _href="<{$m.href}>" name="<{$m.id}>">
                         <i class="<{$m.icon}>" style="padding-right: 5px;"></i>
                         <{$m.name}>
                     </a>
 
                     <dl class="<{$m.child}>">
                         <foreach name="m['menu']" item="me">
-                            <dd style="<{$me.show}>" class="<{$me.open}>"><a href="javascript:;" _href="<{$me.href}>"><{$me.name}></a></dd>
+                            <dd style="<{$me.show}>" class="<{$me.open}>"><a href="javascript:;" _href="<{$me.href}>" name="<{$me.id}>"><{$me.name}></a></dd>
                         </foreach>
                     </dl>
 

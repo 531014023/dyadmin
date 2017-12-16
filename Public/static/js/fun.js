@@ -320,3 +320,39 @@ function GetDateStr(AddDayCount) {
     return y+"-"+m+"-"+d+" 00:00:00";
 }
 enter();
+
+/**
+ * layui的table渲染封装
+ * @param table
+ * @param elem
+ * @param url
+ * @param limit
+ * @param cols
+ */
+function layTable(table,url,cols,limit,elem) {
+    limit = arguments[3]?arguments[3]:10;
+    elem = arguments[4]?arguments[4]:'pagetable';
+    table.render({
+        elem:'#'+elem,
+        url:url,
+        request: {
+            pageName: 'p' //页码的参数名称，默认：page
+            ,limitName: 'page' //每页数据量的参数名，默认：limit
+        },
+        response: {
+            statusName: 'status' //数据状态的字段名称，默认：code
+            ,statusCode: 1 //成功的状态码，默认：0
+            ,msgName: 'info' //状态信息的字段名称，默认：msg
+            ,countName: 'count' //数据总数的字段名称，默认：count
+            ,dataName: 'data' //数据列表的字段名称，默认：data
+        },
+        page:{
+            hash:'p',
+            next:'下一页',
+            prev:"上一页"
+        },
+        limit:limit,
+        loading:true,
+        cols:cols
+    });
+}
