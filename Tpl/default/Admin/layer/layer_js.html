@@ -3,7 +3,7 @@
     var app = "__APP__";
 </script>
 <script src="__PUBLIC__/Admin/Js/jquery.js"></script>
-<script src="__PUBLIC__/static/layui/layui.all.js"></script>
+<script src="__PUBLIC__/static/layui/layui.js"></script>
 <script type="text/javascript" src="__PUBLIC__/static/js/dialog/layer.js"></script>
 <script type="text/javascript" src="__PUBLIC__/static/js/dialog.js"></script>
 <script type="text/javascript" src="__PUBLIC__/static/js/fun.js"></script>
@@ -39,6 +39,22 @@
         element.on('tabDelete(title)', function(data){
             $('[lay-filter=title]').removeAttr("lay-allowClose");
             $('.layui-tab-title li').eq(0).find('i').remove();
+        });
+
+        //tab选项卡切换时侧边栏自动切换到对应位置
+        element.on('tab(title)',function (data) {
+            var index = data.index;//得到当前Tab的所在下标
+            var src = $(".dy-iframe").eq(index).attr("src");
+            var obj = $("[lay-filter=demo]").find("a[_href='"+src+"']");
+            $('.layui-nav-item').removeClass('layui-nav-itemed');
+            $('.layui-nav-item').removeClass('layui-this');
+            $('.layui-nav-item a').removeClass('layui-this');
+            obj.addClass("layui-this");
+            if(obj.parent().is("li")){
+                obj.parent().addClass('layui-this');
+            }else{
+                obj.parent().parent().parent().addClass('layui-nav-itemed');
+            }
         });
     });
 

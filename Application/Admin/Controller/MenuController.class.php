@@ -41,7 +41,8 @@ class MenuController extends AdminbaseController
         if(IS_GET) {
             $info = $menu->get_data("select", ["pid" => 0,"use_status"=>1]);
             $this->assign("menu", $info);
-            return $this->display("Menu:addMenu");
+//            return $this->display("Menu:addMenu");
+            return $this->display("layer_menu:addMenu");
         }else{
             $map['name'] = I("name");
             $map['icon'] = I("icon");
@@ -75,7 +76,7 @@ class MenuController extends AdminbaseController
             $this->assign("menu", $info);
             $this->assign("info",$menuInfo);
             $this->assign("root",session(admin.".root"));
-            return $this->display("Menu:updateMenu");
+            return $this->display("layer_menu:updateMenu");
         }else{
             $map['id'] = I("id");
             $map['name'] = I("name");
