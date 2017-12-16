@@ -6,11 +6,11 @@
     <div style="padding:15px;height: 100%;">
         <div class="layui-row">
             <div class="layui-col-xs11">
-                <blockquote class="layui-elem-quote" style="font-size: 20px;padding-top: 10px;color: #0A9800;">
-                    欢迎 <php>echo getAdminUser(session(admin_id));</php> 使用 <{$admin_name_long}>!
+                <blockquote class="layui-elem-quote">
+                    <p style="font-size: 18px;padding: 10px;padding-left:0;">欢迎 <php>echo getAdminUser(session(admin_id));</php> 回到 <{$admin_name_long}>!</p>
+                    <p>登录次数：<{$admin.login_count}> </p>
+                    <p>上次登录IP：<{$admin.ip}>  上次登录时间：<{$admin.login_time}></p>
                 </blockquote>
-                <p>登录次数：<{$admin.login_count}> </p>
-                <p>上次登录IP：<{$admin.ip}>  上次登录时间：<{$admin.login_time}></p>
                 <table class="layui-table">
                     <thead>
                     <tr>

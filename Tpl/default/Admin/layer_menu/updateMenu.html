@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<include file="layer:layer_head"/>
+<body>
+    <!-- 内容主体区域 -->
+    <div style="padding:15px;height: 100%;">
+        <div class="layui-row">
+            <div class="layui-col-xs7">
+                <div class="layui-form">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label"> 菜单名称 </label>
+                        <div class="layui-input-block">
+                            <input type="text" class="layui-hide" name="id" value="<{$info.id}>">
+                            <input type="text" class="layui-input" name="name" placeholder="菜单名" required lay-verify="required" value="<{$info.name}>">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label"> 上级菜单 </label>
+                        <div class="layui-input-block">
+                            <select name="menu" lay-filter="menu">
+                                <option value="0"
+                                <php>
+                                    if($info['pid'] == 0)
+                                    echo 'selected';
+                                </php>
+                                >顶级菜单</option>
+                                <foreach name="menu" item="m">
+                                    <option value="<{$m.id}>"
+                                    <php>
+                                        if($info['pid'] == $m['id'])
+                                        echo 'selected';
+                                    </php>
+                                    ><{$m.name}></option>
+                                </foreach>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label"> 菜单图标 </label>
+                        <div class="layui-input-block">
+                            <input type="text" class="layui-input" name="icon" placeholder="一级菜单需配置" value="<{$info.icon}>">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label"> 链接 </label>
+                        <div class="layui-input-block">
+                            <input type="text" class="layui-input" name="href" placeholder="示例:/admin/index/index" value="<{$info.href}>">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label"> 排序 </label>
+                        <div class="layui-input-block">
+                            <input type="text" class="layui-input" name="sort" placeholder="数字越小越靠前" autocomplete="off" value="<{$info.sort}>">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label"> 是否启用 </label>
+                        <div class="layui-input-block">
+                            <input type="checkbox" name="use_status" lay-skin="switch" lay-text="ON|OFF"
+                            <php>
+                                if($info['use_status'])
+                                echo "checked";
+                            </php>
+                             value="1">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button class="layui-btn layui-btn-normal" lay-submit lay-filter="updateMenu">
+                                <i class="iconfont icon-pingjia"></i>
+                                修改
+                            </button>
+                            <button class="layui-btn layui-btn-danger" lay-submit lay-filter="delMenu"
+                                    style="display:none;
+								<php>
+									if($root == 0)
+									echo 'none;'
+								</php>
+								"
+                            >
+                                <i class="iconfont icon-changyonggoupiaorenshanchu"></i>
+                                删除
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<include file="layer:layer_js"/>
+<!--自己的js代码引入-->
+<script type="text/javascript">
+layui.use('form',function () {
+    var form = layui.form;
+    form.on('submit(updateMenu)',function (data) {
+        var json = data.field;
+        if(!('use_status' in json)){
+            json.use_status = '0';
+        }
+        var update_url = root+"/admin/menu/updateMenu";
+        $.post(update_url,json,function (res) {
+            if(res.status){
+                dialog.success(res.info,function () {
+                    var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                    parent.location.reload();
+                    parent.layer.close(index); //再执行关闭
+                });
+            }else{
+                dialog.error(res.info);
+            }
+        });
+        return false;
+    });
+
+    form.on("submit(delMenu)",function (data) {
+        var json = data.field;
+        if(!('use_status' in json)){
+            json.use_status = '0';
+        }
+        dialog.confirm("删除菜单后无法恢复!您真的要删除此菜单吗?",function () {
+            var update_url = root+"/admin/menu/delMenu";
+            $.post(update_url,json,function (res) {
+                if(res.status){
+                    dialog.success(res.info,function () {
+                        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                        parent.location.reload();
+                        parent.layer.close(index); //再执行关闭
+                    });
+                }else{
+                    dialog.error(res.info);
+                }
+            });
+        });
+
+        return false;
+    });
+    form.on('select(menu)',function (data) {
+        var menu_id = data.value;
+        if(menu_id != 0){
+            //不允许填写图标
+            $("[name=icon]").attr("disabled",true);
+        }else{
+            $("[name=icon]").removeAttr("disabled");
+        }
+    })
+});
+window.onload = function () {
+    var menu_id = $("[name=menu]").val();
+    if(menu_id != 0){
+        //不允许填写图标
+        $("[name=icon]").attr("disabled",true);
+    }else{
+        $("[name=icon]").removeAttr("disabled");
+    }
+};
+</script>
+</html>

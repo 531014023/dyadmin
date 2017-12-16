@@ -49,10 +49,10 @@
             $('.layui-nav-item').removeClass('layui-nav-itemed');
             $('.layui-nav-item').removeClass('layui-this');
             $('.layui-nav-item a').removeClass('layui-this');
+            $('.layui-nav-item dd').removeClass('layui-this');
             obj.addClass("layui-this");
-            if(obj.parent().is("li")){
-                obj.parent().addClass('layui-this');
-            }else{
+            obj.parent().addClass('layui-this');
+            if(!obj.parent().is("li")){
                 obj.parent().parent().parent().addClass('layui-nav-itemed');
             }
         });
