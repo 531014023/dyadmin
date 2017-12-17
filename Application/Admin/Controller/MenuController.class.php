@@ -94,7 +94,7 @@ class MenuController extends AdminbaseController
             $map['name'] = I("name");
             $map['icon'] = I("icon");
             $map['href'] = I("href");
-            $map['pid'] = I("menu");
+            $map['pid'] = I("menu") != ''?I("menu"):I("pid");
             $map['sort'] = I("sort");
             $map['use_status'] = I("use_status");
             $info = $menu->updateMenuCheck($map);

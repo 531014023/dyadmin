@@ -328,10 +328,11 @@ enter();
  * @param url
  * @param limit
  * @param cols
+ * @param callback
  */
-function layTable(table,url,cols,limit,elem) {
-    limit = arguments[3]?arguments[3]:10;
-    elem = arguments[4]?arguments[4]:'pagetable';
+function layTable(table,url,cols,callback,limit,elem) {
+    limit = arguments[4]?arguments[4]:10;
+    elem = arguments[5]?arguments[5]:'pagetable';
     table.render({
         elem:'#'+elem,
         url:url,
@@ -353,6 +354,42 @@ function layTable(table,url,cols,limit,elem) {
         },
         limit:limit,
         loading:true,
-        cols:cols
+        cols:cols,
+        done:function () {
+            if(callback){
+                callback();
+            }
+        }
     });
+}
+
+/**
+ * 获取表格中点击的列的json数据
+ * @param tr
+ * @returns {{}}
+ */
+function getJsonToTable(tr) {
+    var tds = tr.find("td");
+    var json = {};
+    for (var i=0;i<tds.length;i++){
+        var field = tds.eq(i).attr("data-field");
+        if(!isNumber(field)) {
+            var value = tds.eq(i).attr("data-content");
+            if (!value) {
+                value = tds.eq(i).text();
+            }
+            json[field] = value;
+        }
+    }
+    return json;
+}
+
+/**
+ * 判断是否是数字
+ * @param num
+ * @returns {boolean}
+ */
+function isNumber(num) {
+    var reNum=/^\d*$/;
+    return(reNum.test(num));
 }

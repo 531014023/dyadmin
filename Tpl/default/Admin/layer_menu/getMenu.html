@@ -28,10 +28,12 @@
 </script>
 <script type="text/html" id="use_status">
     {{# if(d.use_status == 0){ }}
-    <span class="layui-badge layui-bg-orange">尚未启用</span>
+    <!--<span class="layui-badge layui-bg-orange">尚未启用</span>-->
+    <input type="checkbox" name="use_status" lay-filter="use_status" lay-skin="switch" lay-text="ON|OFF">
     {{#  }  }}
     {{# if(d.use_status == 1){ }}
-    <span class="layui-badge layui-bg-blue">已启用</span>
+    <!--<span class="layui-badge layui-bg-blue">已启用</span>-->
+    <input type="checkbox" name="use_status" lay-filter="use_status" lay-skin="switch" lay-text="ON|OFF" checked>
     {{#  }  }}
 </script>
 <script type="text/html" id="tool">
@@ -41,20 +43,27 @@
 //    var urlquery = "__ROOT__/admin/Menu/menuList";
     var urlquery = "__ROOT__/admin/Menu/getMenuList";
 //    page(urlquery);
-    layui.use('table',function () {
+    layui.use(['table','form','layer'],function () {
         var table = layui.table;
+        var form = layui.form;
+        var layer = layui.layer;
         var cols = [[
-            {field:'id',title:'ID',width:'3%'},
-            {field:'sort',title:'排序',width:'5%'},
+            {field:'id',title:'ID',width:'3%',style:'display:none;'},
+            {field:'pid',title:'PID',width:'3%',style:'display:none;'},
+            {field:'sort',title:'排序',width:'5%',edit:true},
             {field:'name',title:'菜单名称',templet:"#name",edit:true},
-            {field:'use_status',title:'启用状态',width:'10%',edit:true,templet:'#use_status'},
-            {field:'href',title:'链接'},
+            {field:'use_status',title:'启用状态',width:'10%',templet:'#use_status'},
+            {field:'href',title:'链接',edit:true},
             {field:'icon',title:'图标',width:'15%',edit:true,templet:"<div><i class='{{d.icon}}'></i></div>"},
             {field:'action',title:'方法'},
             {fixed: 'right', align:'center', toolbar: '#tool',width:'7%'}
         ]];
-        layTable(table,urlquery,cols,5);
-
+        //表格渲染
+        layTable(table,urlquery,cols,function () {
+            $("th[data-field=id]").css("display","none");
+            $("th[data-field=pid]").css("display","none");
+        },5);
+        //工具栏点击效果
         table.on('tool(menu)',function (obj) {
             var data = obj.data; //获得当前行数据
             console.log(data);
@@ -64,6 +73,41 @@
                 updateMenu(table,data.id);
             }
         });
+        //单元格编辑
+        table.on('edit(menu)',function (obj) {
+            var json = obj.data;
+            delete json.LAY_TABLE_INDEX;
+            console.log(json);
+            var update_url = root+"/admin/menu/updateMenu";
+            $.post(update_url,json,function (res) {
+                if(res.status){
+                    layer.msg(res.info,{icon:6,time:1500,shade:0.3,success:function () {
+                        table.reload("pagetable");
+                    }});
+                }else{
+                    dialog.error(res.info);
+                }
+            });
+        });
+        //开关点击
+        form.on('switch(use_status)',function (data) {
+            var checked = data.elem.checked;
+            $(data.elem).parent().parent().attr("data-content",checked?1:0);
+            var tr = $(data.elem).parent().parent().parent();
+            //获取tr的json数据
+            var json = getJsonToTable(tr);
+            var update_url = root+"/admin/menu/updateMenu";
+            $.post(update_url,json,function (res) {
+                if(res.status){
+                    layer.msg(res.info,{icon:6,time:1500,shade:0.3,success:function () {
+                        table.reload("pagetable");
+                    }});
+                }else{
+                    dialog.error(res.info);
+                }
+            });
+        });
+
 
         $("#addMenu").click(function () {
             //每次点击都会重新初始化赋值

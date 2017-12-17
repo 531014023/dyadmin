@@ -83,7 +83,7 @@
         //设置地址栏
         window.location.hash = menu_id;
         var len = $('.layui-tab-title li').length;
-        if(len==1){
+        if(len>=1){
             $('[lay-filter=title]').attr("lay-allowClose",true);
         }
         var res = element.tabAdd("title",{
