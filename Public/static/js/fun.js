@@ -349,8 +349,8 @@ function layTable(table,url,cols,callback,limit,elem) {
         },
         page:{
             hash:'p',
-            next:'下一页',
-            prev:"上一页"
+            last:false,
+            layout:['prev','page','next','count','limit']
         },
         limit:limit,
         loading:true,
@@ -381,6 +381,20 @@ function getJsonToTable(tr) {
             json[field] = value;
         }
     }
+    return json;
+}
+
+/**
+ * 过滤表单中空参数
+ * @param json
+ * @returns {*}
+ */
+function jsonFilter(json) {
+    $.each(json,function (k,v) {
+       if(v == ''){
+           delete json[k];
+       }
+    });
     return json;
 }
 

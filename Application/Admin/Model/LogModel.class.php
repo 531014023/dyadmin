@@ -27,6 +27,20 @@ class LogModel extends Model
     }
 
     /**
+     * @return mixed
+     */
+    public function get_log_list($where=array('model'=>'Home'),$field='*'){
+        $p = I("p",1);
+        $pageCount = I("page",PAGECOUNT);
+        $count = $this->cache(600)->where($where)->count();
+        $res = $this->field($field)->where($where)->page($p,$pageCount)->order("id desc")->select();
+        foreach ($res as $k=>$v){
+            $res[$k]['log'] = str_replace("\n",'<br/>',$v['log']);
+        }
+        return array("data"=>$res,'count'=>$count);
+    }
+
+    /**
      * @param $where
      * @return mixed
      */

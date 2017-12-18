@@ -8,7 +8,7 @@
             <div class="layui-col-xs7">
                 <div class="layui-form">
                     <div class="layui-form-item">
-                        <label class="layui-form-label"> 菜单名称 </label>
+                        <label class="layui-form-label"> <span style="color: #FF5722;">*</span>  菜单名称 </label>
                         <div class="layui-input-block">
                             <input type="text" class="layui-hide" name="id" value="<{$info.id}>">
                             <input type="text" class="layui-input" name="name" placeholder="菜单名" required lay-verify="required" value="<{$info.name}>">
@@ -48,7 +48,7 @@
                         </div>
                     </div>
                     <div class="layui-form-item">
-                        <label class="layui-form-label"> 排序 </label>
+                        <label class="layui-form-label"> <span style="color: #FF5722;">*</span> 排序 </label>
                         <div class="layui-input-block">
                             <input type="text" class="layui-input" name="sort" placeholder="数字越小越靠前" autocomplete="off" value="<{$info.sort}>">
                         </div>

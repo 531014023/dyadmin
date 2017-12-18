@@ -21,7 +21,7 @@ class LogController extends AdminbaseController
      * 查询日志信息
      */
     public function Log(){
-        return $this->display("Log:getLog");
+        return $this->display("layer_log:getLog");
     }
 
     /**
@@ -57,6 +57,36 @@ class LogController extends AdminbaseController
     }
 
     /**
+     *查询日志
+     */
+    public function getLogList(){
+        $where['model'] = I("model",'','ucfirst');
+        $where['controller'] = I("controller",'','ucfirst');
+        $where['action'] = I("action",'','ucfirst');
+        $where['uid'] = I("uid");
+        $where['log'] = ["like","%".I("log")."%"];
+        $where['create_time'] = ['GT',I("create_time")];
+        foreach ($where as $k=>$v){
+            if(empty($v)){
+                unset($where[$k]);
+            }
+            if(is_array($v) && empty($v[1])){
+                unset($where[$k]);
+            }
+        }
+        if(empty(I("log"))){
+            unset($where['log']);
+        }
+        $field = "id,uid,controller,model,action,log,create_time,action_type";
+        $res = $this->log->get_log_list($where,$field);
+        if($res['data']) {
+            $res['status'] = 1;
+            return $this->ajaxReturn($res);
+        }
+        return $this->getinfo(0,"系统出错");
+    }
+
+    /**
      * 删除
      */
     public function delLog(){
@@ -65,14 +95,20 @@ class LogController extends AdminbaseController
         $where['action'] = I("action",'','ucfirst');
         $where['uid'] = I("uid");
         $where['log'] = ["like","%".I("log")."%"];
-        $where['create_time'] = I("create_time");
+        $where['create_time'] = ['GT',I("create_time")];
         foreach ($where as $k=>$v){
             if(empty($v)){
+                unset($where[$k]);
+            }
+            if(is_array($v) && empty($v[1])){
                 unset($where[$k]);
             }
         }
         if(empty(I("log"))){
             unset($where['log']);
+        }
+        if(empty($where)){
+            return $this->getinfo(0,"请选择一种条件删除!");
         }
         $res = $this->log->del_log($where);
         if($res){

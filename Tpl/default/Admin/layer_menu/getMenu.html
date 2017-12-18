@@ -5,7 +5,6 @@
     <!-- 内容主体区域 -->
     <div style="padding:15px;height: 100%;">
         <include file="layer:title"/>
-        <hr/>
         <div class="layui-row">
             <div class="layui-col-xs12 layui-form-item">
                 <button class="layui-btn layui-btn-normal" type="button" id="addMenu">
@@ -48,20 +47,21 @@
         var form = layui.form;
         var layer = layui.layer;
         var cols = [[
-            {field:'id',title:'ID',width:'3%',style:'display:none;'},
-            {field:'pid',title:'PID',width:'3%',style:'display:none;'},
+            {field:'id',title:'ID',width:'3%'},
+            {field:'pid',title:'层级',width:'13%'},
             {field:'sort',title:'排序',width:'5%',edit:true},
-            {field:'name',title:'菜单名称',templet:"#name",edit:true},
+            {field:'name',title:'菜单名称',width:'20%',templet:"#name",edit:true},
             {field:'use_status',title:'启用状态',width:'10%',templet:'#use_status'},
             {field:'href',title:'链接',edit:true},
-            {field:'icon',title:'图标',width:'15%',edit:true,templet:"<div><i class='{{d.icon}}'></i></div>"},
+            {field:'icon',title:'图标',width:'10%',edit:true,templet:"<div><i class='{{d.icon}}'></i></div>"},
             {field:'action',title:'方法'},
             {fixed: 'right', align:'center', toolbar: '#tool',width:'7%'}
         ]];
         //表格渲染
         layTable(table,urlquery,cols,function () {
-            $("th[data-field=id]").css("display","none");
-            $("th[data-field=pid]").css("display","none");
+            //隐藏部分列
+            $("th[data-field=id],td[data-field=id]").css("display","none");
+            $("th[data-field=pid],td[data-field=pid]").css("display","none");
         },5);
         //工具栏点击效果
         table.on('tool(menu)',function (obj) {
@@ -115,7 +115,7 @@
             layer.open({
                 type: 2,
                 title:'添加新菜单',
-                area: ['40%', '75%'],
+                area: ['40%', '70%'],
                 fixed: false, //不固定
                 maxmin: true,
                 content: '__ROOT__/admin/menu/addmenu.html',
@@ -138,7 +138,7 @@
         layer.open({
             type:2,
             title:"编辑菜单",
-            area:['40%','75%'],
+            area:['40%','70%'],
             fixed: false, //不固定
             maxmin: true,
             content: '__ROOT__/admin/menu/updateMenu.html?menu_id='+id,

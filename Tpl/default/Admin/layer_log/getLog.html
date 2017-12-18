@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<include file="layer:layer_head"/>
+<body>
+    <!-- 内容主体区域 -->
+    <div style="padding:15px;height: 100%;">
+        <include file="layer:title"/>
+        <div class="layui-row">
+            <div class="layui-col-xs3 layui-form" style="margin-right: 10px;">
+                <div class="layui-form-item">
+                    <label class="layui-form-label"> 模块 </label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input" name="model" placeholder="model">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label"> 控制器 </label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input" name="controller" placeholder="controller">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label"> 方法 </label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input" name="action" placeholder="action">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label"> 用户id </label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input" name="uid" placeholder="uid">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label"> 日志内容 </label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input" name="log" placeholder="log">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label"> 时间 </label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input" name="create_time" placeholder="0000-00-00 00:00:00" id="time">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn layui-btn-normal" lay-submit lay-filter="getLog">
+                            <i class="iconfont icon-sousuo"></i>
+                            查询
+                        </button>
+                        <button class="layui-btn layui-btn-danger" lay-submit lay-filter="delLog">
+                            <i class="iconfont icon-changyonggoupiaorenshanchu"></i>
+                            删除
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-xs7" id="pagetable" lay-filter="log"></div>
+        </div>
+    </div>
+</body>
+<include file="layer:layer_js"/>
+<!--自己的js代码引入-->
+<script type="text/javascript">
+layui.use(['table','layer','laydate','form'],function () {
+    var table = layui.table;
+    var layer = layui.layer;
+    var laydate = layui.laydate;
+    var form = layui.form;
+    var log_url = root+"/admin/log/getloglist";
+    var cols = [[
+        {field:'id',title:'ID'},
+        {field:'uid',title:'用户id',width:'6%'},
+        {field:'model',title:'模块',width:'6%'},
+        {field:'controller',title:'控制器',width:'6%'},
+        {field:'action',title:'操作',width:'8%'},
+        {field:'action_type',title:'访问类型',width:'7%'},
+        {field:'create_time',title:'时间',width:'13%'},
+        {field:'log',title:'日志',width:'15%'}
+    ]];
+    layTable(table,log_url,cols,function () {
+        $("th[data-field=id],td[data-field=id]").css("display","none");
+        //让文字不隐藏
+//        $("td[data-field=log] .layui-table-cell").css("height","auto");
+//        $("td[data-field=log] .layui-table-cell").css("text-overflow","initial");
+//        $("td[data-field=log] .layui-table-cell").css("white-space","inherit");
+    });
+
+    laydate.render({
+        elem:'#time',
+        type:'datetime'
+    });
+    form.on("submit(getLog)",function (obj) {
+        var json = obj.field;
+        json = jsonFilter(json);
+        if($.isEmptyObject(json)){
+            return layer.msg("请至少选择一种条件作为删除条件!",{icon:5,time:1500,shade:0.3});
+        }
+        table.reload("pagetable",{
+            where:json
+        });
+        return false;
+    });
+    form.on("submit(delLog)",function (obj) {
+        var json = obj.field;
+        json = jsonFilter(json);
+        if($.isEmptyObject(json)){
+            return layer.msg("请至少选择一种条件作为删除条件!",{icon:5,time:1500,shade:0.3});
+        }
+        var url = root+"/admin/log/dellog";
+        $.post(url,json,function (res) {
+           if(res.status){
+               layer.msg(res.info,{icon:6,time:1000,shade:0.3,success:function () {
+                   table.reload("pagetable");
+               }});
+           }else{
+               layer.msg(res.info,{icon:5,time:1500,shade:0.3});
+           }
+        });
+        return false;
+    });
+});
+</script>
+</html>

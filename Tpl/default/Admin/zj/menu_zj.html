@@ -1,26 +1,26 @@
-<!--<div class="table-responsive">
+<div class="table-responsive">
     <table class="col-xs-12 table table-bordered">
         <thead>
             <tr>
-                <th>排序</th>
-                <th>菜单标题</th>
-                <th>是否启用</th>
-                <th>链接</th>
-                <th>菜单图标</th>
-                <th>操作</th>
+                <th data-field="sort">排序</th>
+                <th data-field="name">菜单标题</th>
+                <th data-field="use_status">是否启用</th>
+                <th data-field="href">链接</th>
+                <th data-field="icon">菜单图标</th>
+                <th data-field="action">操作</th>
             </tr>
         </thead>
         <tbody>
             <foreach name="menu" item='m'>
             <tr name="<{$m.id}>">
-                <td><{$m.sort}></td>
-                <td style="border-bottom: none;"><b><{$m.name}></b>
+                <td data-field="sort" data-content="<{$m.sort}>"><{$m.sort}></td>
+                <td data-field="name" data-content="<{$m.name}>" style="border-bottom: none;"><b><{$m.name}></b>
                     <a class="red action-buttons" href="javascript:updateMenu(<{$m.id}>)">
                         <i class="icon-pencil bigger-130"></i>
                         编辑
                     </a>
                 </td>
-                <td>
+                <td data-field="use_status" data-content="<{$m.use_status}>">
                     <php>
                         if($m['use_status'] == 1)
                         echo "<span class='label label-success arrowed-in-right arrowed'>已启用</span>";
@@ -31,9 +31,9 @@
 											</span>";
                     </php>
                 </td>
-                <td><a href="<{$m.href}>"><{$m.href}></a></td>
-                <td><i class="<{$m.icon}>"></i></td>
-                <td><{$m.action}></td>
+                <td data-field="href" data-content="<{$m.href}>"><a href="<{$m.href}>"><{$m.href}></a></td>
+                <td data-field="icon" data-content="<{$m.icon}>"><i class="<{$m.icon}>"></i></td>
+                <td data-field="action" data-content="<{$m.action}>"><{$m.action}></td>
             </tr>
                 <foreach name="m['menu']" item="me">
                 <tr name="<{$me.id}>">
@@ -68,12 +68,12 @@
 </div>
 <div class="col-xs-12 status">
     <{$show}>
-</div>-->
+</div>
 
 
 
 
-<div class="">
+<!--<div class="">
     <table class="layui-col-xs12 layui-table" lay-size="lg">
         <thead>
         <tr>
@@ -143,4 +143,4 @@
 </div>
 <div class="layui-col-xs12 status">
     <{$show}>
-</div>
+</div>-->
