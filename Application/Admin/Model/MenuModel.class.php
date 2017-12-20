@@ -43,31 +43,18 @@ class MenuModel extends BaseModel
     }
 
     /**
-     * 权限判断和菜单展示判断
+     * 菜单展示判断
      * @param $menu
      * @param $auth
-     * @param $all_auth
      * @return mixed
      */
-    public function menuShow($menu, $auth, $all_auth)
+    public function menuShow($menu, $auth)
     {
-        if(session(admin.".root") == 0) {
-            if (!in_array(strtolower(ACTION_NAME), $auth)) {
-                if (in_array(strtolower(ACTION_NAME), $all_auth)) {
-                    $this->error = "您没有此权限!";
-                    return false;
-                }
-            }
-        }
-        $title = [];
         foreach ($menu as $k=>$v){
             $count = 0;
             $menu[$k]['open'] = "";
             $menu[$k]['display'] = "display:none;";
             if(count($v['menu']) == 0){
-                if(strtolower(ACTION_NAME) == strtolower($v['action'])){
-                    $title = ["one"=>$v,"two"=>$v];
-                }
                 if(session(admin.".root") == 0){
                     if(!in_array(strtolower($v['action']),$auth)){
                         $menu[$k]['show'] = "display:none;";
@@ -87,9 +74,6 @@ class MenuModel extends BaseModel
                 }
             }else {
                 foreach ($v['menu'] as $key => $val) {
-                    if(strtolower(ACTION_NAME) == strtolower($val['action'])){
-                        $title = ["one"=>$v,"two"=>$val];
-                    }
                     if (session(admin.".root") == 0) {
                         if (!in_array(strtolower($val['action']), $auth)) {
                             $count++;
@@ -122,7 +106,31 @@ class MenuModel extends BaseModel
                 $menu[$k]['child'] = "layui-nav-child";
             }
         }
-        return ["menu"=>$menu,"title"=>$title];
+        return $menu;
+    }
+
+    /**
+     * 后侧面包屑
+     * @param $menu
+     * @return array
+     */
+    public function titleShow($menu)
+    {
+        $title = [];
+        foreach ($menu as $k=>$v){
+            if(count($v['menu']) == 0) {
+                if (strtolower(ACTION_NAME) == strtolower($v['action'])) {
+                    $title = ["one" => $v, "two" => $v];
+                }
+            }else {
+                foreach ($v['menu'] as $key => $val) {
+                    if(strtolower(ACTION_NAME) == strtolower($val['action'])){
+                        $title = ["one"=>$v,"two"=>$val];
+                    }
+                }
+            }
+        }
+        return $title;
     }
 
     /**
@@ -190,7 +198,7 @@ class MenuModel extends BaseModel
             $map['sort'] = 0;
         }
         $action = explode("/",explode(".",$map['href'])[0]);
-        $map['action'] = $action[count($action)-1];
+        $map['action'] = strtolower($action[count($action)-1]);
         return $map;
     }
 

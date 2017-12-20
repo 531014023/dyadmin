@@ -70,4 +70,21 @@ class AdminModel extends BaseModel
         $res = $this->field($field,$field_bool)->where($map)->page($p,$pageCount)->order($order)->select();
         return ['list'=>$res,'show'=>$show];
     }
+
+    /**
+     * 获取管理员列表
+     * @param $map
+     * @param string $order
+     * @param string $field
+     * @param bool $field_bool
+     * @return array
+     */
+    public function getAdminList($map, $order="id asc", $field="*", $field_bool=false)
+    {
+        $p = I("p",1);
+        $pageCount = I("page",PAGECOUNT);
+        $count = $this->where($map)->count();
+        $res = $this->field($field,$field_bool)->where($map)->page($p,$pageCount)->order($order)->select();
+        return ['data'=>$res,'count'=>$count];
+    }
 }

@@ -120,11 +120,12 @@ class AdminController extends AdminbaseController
                 }
             }
             $this->assign("auth", $auth);
-            return $this->display("Admin:addAdmin");
+            return $this->display("layer_admin:addAdmin");
         }else{
             $username = I("username");
             $password = I("password");
-            $auth = json_decode(I("auth"),true);
+//            $auth = json_decode(I("auth"),true);
+            $auth = I("auth");
             if(!$username || !$password || !$auth){
                 return $this->getinfo(0,"参数不能为空");
             }
@@ -135,7 +136,7 @@ class AdminController extends AdminbaseController
             }
             $data['username'] = $username;
             $data['password'] = password_hash($password,PASSWORD_DEFAULT);
-            $data['auth'] = join(",",$auth);
+            $data['auth'] = $auth;
             $res = $admin->add($data);
             if($res){
                 return $this->getinfo(1,"添加成功");
@@ -152,7 +153,8 @@ class AdminController extends AdminbaseController
     {
         $admin_id = I("admin_id");
         $password = I("password");
-        $auth = json_decode(I("auth"),true);
+//        $auth = json_decode(I("auth"),true);
+        $auth = I("auth");
         if(!$admin_id || !$auth){
             return $this->getinfo(0,"参数错误");
         }
@@ -167,9 +169,8 @@ class AdminController extends AdminbaseController
             }
             $info['password'] = password_hash($password,PASSWORD_DEFAULT);
         }
-        $str_auth = join(",",$auth);
-        if($str_auth != $info['auth']){
-            $info['auth'] = $str_auth;
+        if($auth != $info['auth']){
+            $info['auth'] = $auth;
         }
         $res = $admin->save($info);
         if($res){
@@ -180,7 +181,7 @@ class AdminController extends AdminbaseController
 
     public function getAdmin()
     {
-        return $this->display("Admin:getAdmin");
+        return $this->display("layer_admin:getAdmin");
     }
 
     public function getAdminList()
@@ -190,6 +191,14 @@ class AdminController extends AdminbaseController
         $this->assign("show",$res['show']);
         $data = $this->fetch("zj:admin_zj");
         return $this->getinfo(1,$res,$data);
+    }
+
+    public function get_admin_list()
+    {
+        $res = D("Admin")->getAdminList([]);
+        $res['status'] = 1;
+        $res['info'] = '查询成功';
+        $this->ajaxReturn($res);
     }
 
 

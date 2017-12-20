@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<include file="layer:layer_head"/>
+<body>
+    <!-- 内容主体区域 -->
+    <div style="padding:15px;height: 100%;">
+        <include file="layer:title"/>
+        <div class="layui-row">
+            <div class="layui-form-item layui-col-xs12">
+                <button class="layui-btn layui-btn-normal" type="button" id="addAdmin">
+                    <i class="iconfont icon-jiajianzujianjiahao"></i>
+                    添加管理员
+                </button>
+            </div>
+            <div class="layui-col-xs12" id="pagetable" lay-filter="admin"></div>
+        </div>
+    </div>
+</body>
+<include file="layer:layer_js"/>
+<script type="text/html" id="root">
+    {{# if(d.root == 0){ }}
+    <span class="layui-badge layui-bg-orange">管理员</span>
+    {{#  }  }}
+    {{# if(d.root == 1){ }}
+    <span class="layui-badge layui-bg-blue">超级管理员</span>
+    {{#  }  }}
+</script>
+<script type="text/html" id="auth">
+    {{# if(d.root == 0){ }}
+    {{d.auth}}
+    {{#  }  }}
+    {{# if(d.root == 1){ }}
+    所有权限
+    {{#  }  }}
+</script>
+<script type="text/html" id="tool">
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit">编辑</a>
+</script>
+<!--自己的js代码引入-->
+<script type="text/javascript">
+    layui.use(['table','layer'],function (table,layer) {
+        var admin_url = root+"/admin/admin/get_admin_list";
+        var cols = [[
+            {field:'id',title:'ID'},
+            {field:'username',title:'用户名'},
+            {field:'password',title:'密码'},
+            {field:'ip',title:'ip'},
+            {field:'login_time',title:'最后登录时间',width:'13%'},
+            {field:'login_count',title:'登录次数'},
+            {field:'root',title:'超级管理员',templet:'#root'},
+            {field:'auth',title:'权限',templet:"#auth"},
+            {field:'right',align:'center',toolbar:"#tool",width:'7%'}
+        ]];
+        layTable(table,admin_url,cols,function () {
+            $("th[data-field=id],td[data-field=id]").css("display","none");
+            $("th[data-field=password],td[data-field=password]").css("display","none");
+        });
+
+        $("#addAdmin").click(function () {
+            var cancel = false;
+            layer.open({
+                type: 2,
+                title:'添加管理员',
+                area: ['50%', '70%'],
+                fixed: false, //不固定
+                maxmin: true,
+                content: '__ROOT__/admin/admin/addadmin.html',
+                end:function () {
+                    //只在正常关闭时刷新table,点击关闭时不触发
+                    if(cancel){
+                        return false;
+                    }
+                    table.reload("pagetable");
+                },
+                cancel:function (index) {
+                    cancel = true;
+                }
+            });
+        });
+        table.on("tool(admin)",function (obj) {
+            var json = obj.data;
+            var cancel = false;
+            layer.open({
+                type: 2,
+                title:'编辑管理员',
+                area: ['50%', '70%'],
+                fixed: false, //不固定
+                maxmin: true,
+                content: '__ROOT__/admin/admin/addadmin.html?admin_id='+json.id,
+                end:function () {
+                    //只在正常关闭时刷新table,点击关闭时不触发
+                    if(cancel){
+                        return false;
+                    }
+                    table.reload("pagetable");
+                },
+                cancel:function (index) {
+                    cancel = true;
+                }
+            });
+        });
+    });
+</script>
+</html>

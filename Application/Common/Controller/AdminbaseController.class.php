@@ -13,6 +13,7 @@ use GatewayClient\Gateway;*/
 class AdminbaseController extends BaseController
 {
     protected $auth = [];
+    protected $all_auth = [];
 
     protected $menu = [];
 
@@ -29,7 +30,7 @@ class AdminbaseController extends BaseController
         if(ACTION_NAME != "login" && session(admin_id)){
             $menu = D("Menu");
             $this->menu = $menu->formatMenu();
-            $all_auth = $menu->formatAuth();
+            $this->all_auth = $menu->formatAuth();
             if(session(admin.".root") == 0) {
                 $admin = D("Admin");
                 $auth = $admin->get_auth();
@@ -39,15 +40,17 @@ class AdminbaseController extends BaseController
                     $this->error("您没有任何权限!");
                 }
             }else{
-                $this->auth = $all_auth;
+                $this->auth = $this->all_auth;
             }
-            $menus = $menu->menuShow($this->menu,$this->auth,$all_auth);
-            $this->menu = $menus['menu'];
-            if($this->menu === false){
+            $this->menu = $menu->menuShow($this->menu,$this->auth);
+            $title = $menu->titleShow($this->menu);
+            $this->assign("menu",$this->menu);
+            $this->assign("title",$title);
+            $auth = D("Auth");
+            $result = $auth->authCheck($this->auth,$this->all_auth);
+            if(!$result){
                 $this->error("您没有此权限!");
             }
-            $this->assign("menu",$this->menu);
-            $this->assign("title",$menus['title']);
         }
         $this->assign("admin_name_long",C("admin_name_long"));
         $this->assign("admin_name",C("admin_name"));
