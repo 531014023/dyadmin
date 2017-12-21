@@ -10,6 +10,7 @@
 			'Mongo' instanceof Think\Model\MongoModel,
 			'View' instanceof Think\Model\ViewModel,
 			'Log' instanceof Admin\Model\LogModel,
+			'Auth' instanceof Admin\Model\AuthModel,
 			'Relation' instanceof Think\Model\RelationModel,
 			'Base' instanceof Common\Model\BaseModel,
 			'Admin' instanceof Admin\Model\AdminModel,
