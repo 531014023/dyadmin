@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<include file="layer:layer_head"/>
+<style>
+    html,body,.layui-fluid{height: 100%;overflow: hidden;}
+    video{width: auto;height: auto;margin: 0;position: fixed;min-height: 100%;min-width: 100%;right: 0;bottom: 0;}
+    .layui-login-form{width: 500px;height: 550px;position: fixed;transform: translateX(-50%) translateY(-50%);top: 50%;left: 50%;}
+    .title{text-align: center;padding: 30px;color: #F0F0F0;}
+    .title>span{color: #FF5722;}
+    .title>i{color: #5FB878;}
+    .login-form{
+        margin: 0 auto;float: none;background-color: #F0F0F0;color: #666;
+        padding: 40px;padding-bottom: 20px;margin-top: 20px;padding-left: 0;
+        border-radius: 10px;box-shadow: 0 0 20px #fff;background-color: rgba(255,255,255,0.8);
+    }
+    .login-btn{float: right;}
+    .remember{padding-left: 63px;}
+</style>
+<body>
+<video autoplay muted loop src="http://video.zcool.cn/889aad37dbc047aeba7d50913ba20e76/4c274d7631df4a8c8da405f4a19dd68c-5287d2089db37e62345123a1be272f8b.mp4"></video>
+    <!-- 内容主体区域 -->
+    <div class="layui-fluid layui-bg-black">
+        <div class="layui-login-form">
+            <h1 class="title">
+                <i class="icon-github-alt"></i>
+                <span><{$admin_name}></span>
+                后台管理系统
+            </h1>
+            <div class="layui-row">
+                <div class="layui-col-xs8 login-form">
+                    <div class="layui-form">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label"> 账号: </label>
+                            <div class="layui-input-block">
+                                <input type="text" class="layui-input" required lay-verify="required" name="username" placeholder="在此输入用户名">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label"> 密码: </label>
+                            <div class="layui-input-block">
+                                <input type="password" class="layui-input" required lay-verify="required" name="password" placeholder="在此输入密码">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-inline remember">
+                                <input type="checkbox" name="member" title="记住密码" lay-filter="member" lay-skin="primary">
+                            </div>
+                            <div class="layui-inline login-btn layui-clear">
+                                <button type="button" lay-filter="login" lay-submit class="layui-btn layui-btn-normal">
+                                    <i class="iconfont icon-yuechiguanli"></i>
+                                    登录
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<include file="layer:layer_js"/>
+<!--自己的js代码引入-->
+<script type="text/javascript">
+    layui.use(['form','layer'],function (form,layer) {
+        //用户名输入框获取焦点
+        $("input[name=username]").focus();
+        //刷新本地数据到登录框
+        var json = layui.data("admin");
+        if(!$.isEmptyObject(json)){
+            $.each(json,function (k,v) {
+                $("input[name="+k+"]").val(v);
+            });
+            $("input[name=member]").attr("checked",true);
+            form.render("checkbox");
+        }
+        form.on("submit(login)",function (obj) {
+            var json = obj.field;
+            //记住密码
+            if(json.member == 'on'){
+                delete json.member;
+                $.each(json,function (k,v) {
+                    var param = {};
+                    param.key = k;
+                    param.value = v;
+                    layui.data("admin",param);
+                });
+            }else{
+                layui.data("admin",null);
+            }
+            var login_url = root+"/admin/admin/login";
+            $.post(login_url,json,function (res) {
+                if(res.status){
+                    var url = root+"/admin/index/layer.html";
+                    return dialog.success(res.info,function () {
+                        window.location.href = url;
+                    });
+                }
+                return layer.msg(res.info,{icon:5,time:1000,anim:6});
+            });
+            return false;
+        });
+
+        enter($("button[lay-filter=login]"));
+        //视频加载完成后删除背景颜色播放视频
+        $("video").on("canplaythrough",function () {
+            $(".layui-fluid").removeClass("layui-bg-black");
+        });
+    });
+</script>
+</html>

@@ -1,6 +1,6 @@
 var dialog = {
     error:function (content,callback,icon) {
-        var con = arguments[2]?arguments[2]:2;
+        var con = arguments[2]?arguments[2]:5;
         layer.alert(content,{icon:con},function (index) {
             layer.close(index);
             if(callback){
@@ -9,7 +9,7 @@ var dialog = {
         });
     },
     success:function (content,callback,icon) {
-        var con = arguments[2]?arguments[2]:1;
+        var con = arguments[2]?arguments[2]:6;
         layer.alert(content,{icon:con},function (index) {
             layer.close(index);
             if(callback) {

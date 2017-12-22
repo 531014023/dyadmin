@@ -17,7 +17,7 @@ class IndexController extends AdminbaseController {
         $this->display("layer:index");
     }
     public function login(){
-        $this->display();
+        $this->display("layer:login");
     }
 
     public function layer()
