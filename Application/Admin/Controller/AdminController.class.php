@@ -39,7 +39,7 @@ class AdminController extends AdminbaseController
                     $res['login_count'] = $res['login_count']+1;
                     $save_res = $this->m->update_admin($res);
                     if($save_res) {
-                        return $this->getinfo(1, '登录成功');
+                        return $this->getinfo(1, '登录成功',session_name());
                     }else{
                         $error = "更新登录资料失败!";
                     }

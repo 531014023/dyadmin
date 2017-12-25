@@ -7,7 +7,7 @@ class IndexController extends AdminbaseController {
         $this->assign("admin",session(admin));
         $_SERVER['SERVER_IP'] = gethostbyname($_SERVER['SERVER_NAME']);
         $this->assign("server",$_SERVER);
-        $this->display();
+        $this->display("layer:base");
     }
 
     public function layer_index(){
@@ -24,5 +24,9 @@ class IndexController extends AdminbaseController {
     {
 //        $this->display();
         $this->display("layer:base");
+    }
+
+    public function test()
+    {
     }
 }

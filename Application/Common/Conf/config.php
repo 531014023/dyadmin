@@ -2,7 +2,7 @@
 return array(
     //'配置项'=>'配置值'
     // 加载扩展配置文件
-    'LOAD_EXT_CONFIG' => 'db',
+    'LOAD_EXT_CONFIG' => 'db,session_redis',
     'SESSION_AUTO_START'    =>      false,//默认不开启session(APP接口需用url传递sid)
     'URL_CASE_INSENSITIVE'  =>  true,//url不区分大小写
     'DEFAULT_FILTER'        => 'strip_tags',//默认参数过滤方法

@@ -21,7 +21,7 @@ class AdminbaseController extends BaseController
     {
         parent::__construct();
 //        Gateway::$registerAddress = REGISTERIP;
-        session_start();
+        session('[start]');
         if(session(admin_id) && ACTION_NAME == 'login'){
             $this->redirect('admin/index/index');
         }else if(!session(admin_id) && ACTION_NAME != 'login'){
