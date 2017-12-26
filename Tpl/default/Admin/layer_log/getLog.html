@@ -95,7 +95,7 @@ layui.use(['table','layer','laydate','form'],function () {
         var json = obj.field;
         json = jsonFilter(json);
         if($.isEmptyObject(json)){
-            return layer.msg("请至少选择一种条件作为删除条件!",{icon:5,time:1500,shade:0.3});
+            return layer.msg("请至少选择一种条件作为删除条件!",{icon:5,time:1500});
         }
         table.reload("pagetable",{
             where:json
@@ -106,16 +106,16 @@ layui.use(['table','layer','laydate','form'],function () {
         var json = obj.field;
         json = jsonFilter(json);
         if($.isEmptyObject(json)){
-            return layer.msg("请至少选择一种条件作为删除条件!",{icon:5,time:1500,shade:0.3});
+            return layer.msg("请至少选择一种条件作为删除条件!",{icon:5,time:1500});
         }
         var url = root+"/admin/log/dellog";
         $.post(url,json,function (res) {
            if(res.status){
-               layer.msg(res.info,{icon:6,time:1000,shade:0.3,success:function () {
+               layer.msg(res.info,{icon:6,time:1000,success:function () {
                    table.reload("pagetable");
                }});
            }else{
-               layer.msg(res.info,{icon:5,time:1500,shade:0.3});
+               layer.msg(res.info,{icon:5,time:1500});
            }
         });
         return false;

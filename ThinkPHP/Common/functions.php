@@ -1251,8 +1251,6 @@ function session($name='',$value='') {
             $type   =   C('SESSION_TYPE');
             $class  =   strpos($type,'\\')? $type : 'Think\\Session\\Driver\\'. ucwords(strtolower($type));
             $hander =   new $class();
-//            ini_set('session.save_handler', 'user');
-//            ini_set('session.save_path', 'tcp://127.0.0.1:6379');
 //            session_set_save_handler(
 //                array(&$hander,"open"),
 //                array(&$hander,"close"),

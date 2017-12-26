@@ -1,6 +1,7 @@
 <?php
 namespace Admin\Controller;
 use Common\Controller\AdminbaseController;
+use Think\Crypt\Driver\Think;
 
 class IndexController extends AdminbaseController {
     public function index(){
@@ -28,5 +29,8 @@ class IndexController extends AdminbaseController {
 
     public function test()
     {
+        $config = C();
+        echo json_encode($config);
+        exit();
     }
 }

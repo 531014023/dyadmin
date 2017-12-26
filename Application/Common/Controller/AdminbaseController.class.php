@@ -55,6 +55,7 @@ class AdminbaseController extends BaseController
         $this->assign("admin_name_long",C("admin_name_long"));
         $this->assign("admin_name",C("admin_name"));
         $this->assign("company",C("company"));
+        $this->assign("footer_text",C("footer_text"));
     }
 
     public function _empty()

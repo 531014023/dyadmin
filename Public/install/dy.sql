@@ -72,3 +72,16 @@ CREATE TABLE `wy_log` (
   KEY `a` (`action`),
   KEY `c` (`controller`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='日志表';
+
+
+-- ----------------------------
+-- Table structure for dy_config
+-- ----------------------------
+DROP TABLE IF EXISTS `dy_config`;
+CREATE TABLE `dy_config` (
+  `id` int(8) NOT NULL AUTO_INCREMENT,
+  `key` varchar(32) NOT NULL DEFAULT '',
+  `value` varchar(128) NOT NULL DEFAULT '',
+  `type` varchar(32) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;

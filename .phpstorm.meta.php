@@ -12,6 +12,7 @@
 			'Log' instanceof Admin\Model\LogModel,
 			'Auth' instanceof Admin\Model\AuthModel,
 			'Relation' instanceof Think\Model\RelationModel,
+			'Config' instanceof Admin\Model\ConfigModel,
 			'Base' instanceof Common\Model\BaseModel,
 			'Admin' instanceof Admin\Model\AdminModel,
 			'Merge' instanceof Think\Model\MergeModel,

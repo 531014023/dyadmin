@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<include file="layer:layer_head"/>
+<body>
+    <!-- 内容主体区域 -->
+    <div style="padding:15px;height: 100%;">
+        <include file="layer:title"/>
+        <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+            <ul class="layui-tab-title">
+                <li class="layui-this">数据库设置</li>
+                <li>后台设置</li>
+                <li>权限分配</li>
+                <li>商品管理</li>
+                <li>订单管理</li>
+            </ul>
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show">
+                    <div class="layui-form">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label"> 数据库类型: </label>
+                            <div class="layui-input-inline">
+                                <select name="DB_TYPE" lay-verify="required">
+                                    <option value=""> 请选择 </option>
+                                    <option value="mysql"
+                                    <?php
+                                        if($db['db_type'] == 'mysql')
+                                        echo 'selected';
+                                    ?>
+                                    > mysql </option>
+                                    <option value="mysqli"
+                                    <?php
+                                        if($db['db_type'] == 'mysqli')
+                                        echo 'selected';
+                                    ?>
+                                    > mysqli </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label"> 主机地址: </label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="DB_HOST" class="layui-input" required placeholder="127.0.0.1" lay-verify="required"
+                                 value="<{$db.db_host}>"
+                                />
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label"> 端口: </label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="DB_PORT" class="layui-input" placeholder="3306" value="<{$db.db_port}>" lay-verify="required|number"/>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label"> 数据库名称: </label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="DB_NAME" class="layui-input" required placeholder="db" lay-verify="required"
+                                value="<{$db.db_name}>"
+                                />
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label"> 登录名: </label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="DB_USER" class="layui-input" placeholder="root" value="<{$db.db_user}>" lay-verify="required"/>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label"> 密码: </label>
+                            <div class="layui-input-inline">
+                                <input type="password" name="DB_PWD" class="layui-input" placeholder=""
+                                    value="<{$db.db_pwd}>"
+                                />
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label"> 表前缀: </label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="DB_PREFIX" class="layui-input" placeholder="dy_" value="<{$db.db_prefix}>" lay-verify="required"/>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button class="layui-btn layui-btn-normal" lay-submit lay-filter="setDb">
+                                    <i class="iconfont icon-xuanzhong" style="font-size: 11px;"></i>
+                                    立即提交
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-tab-item">
+                    <div class="layui-form">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label"> 系统完整名称: </label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="admin_name_long" class="layui-input" placeholder="DY-ACE后台管理系统" value="<{$admin.admin_name_long}>" lay-verify="required"/>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label"> 系统名称: </label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="admin_name" class="layui-input" placeholder="DY-ACE" lay-verify="required"
+                                       value="<{$admin.admin_name}>"
+                                />
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label"> 公司设置: </label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="company" class="layui-input" placeholder="四川-DY有限公司" value="<{$admin.company}>" lay-verify="required"/>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label"> 底部固定位: </label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="footer_text" class="layui-input" placeholder="© layui.com - 底部固定区域" value="<{$admin.footer_text}>" lay-verify="required"/>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button class="layui-btn layui-btn-normal" lay-submit lay-filter="setAdmin">
+                                    <i class="iconfont icon-xuanzhong" style="font-size: 11px;"></i>
+                                    立即提交
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<include file="layer:layer_js"/>
+<!--自己的js代码引入-->
+<script type="text/javascript">
+    layui.use(['form','layer','element'],function (form,layer,element) {
+        form.on("submit(setDb)",function (obj) {
+            var json = obj.field;
+            var url = root+"/admin/config/setDb";
+            $.post(url,json,function (res) {
+                if(res.status){
+                    return layer.msg(res.info,{icon:6,anim: 6});
+                }
+                return layer.msg(res.info,{icon:5,anim: 6});
+            });
+            return false;
+        });
+        form.on("submit(setAdmin)",function (obj) {
+            var json = obj.field;
+            var url = root+"/admin/config/setAdmin";
+            $.post(url,json,function (res) {
+                if(res.status){
+                    return layer.msg(res.info,{icon:6,anim: 6});
+                }
+                return layer.msg(res.info,{icon:5,anim: 6});
+            });
+            return false;
+        });
+    });
+</script>
+</html>

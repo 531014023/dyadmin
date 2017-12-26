@@ -81,7 +81,7 @@
             var update_url = root+"/admin/menu/updateMenu";
             $.post(update_url,json,function (res) {
                 if(res.status){
-                    layer.msg(res.info,{icon:6,time:1500,shade:0.3,success:function () {
+                    layer.msg(res.info,{icon:6,time:1500,success:function () {
                         table.reload("pagetable");
                     }});
                 }else{
@@ -99,7 +99,7 @@
             var update_url = root+"/admin/menu/updateMenu";
             $.post(update_url,json,function (res) {
                 if(res.status){
-                    layer.msg(res.info,{icon:6,time:1500,shade:0.3,success:function () {
+                    layer.msg(res.info,{icon:6,time:1500,success:function () {
                         table.reload("pagetable");
                     }});
                 }else{

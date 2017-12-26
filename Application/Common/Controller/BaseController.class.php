@@ -3,7 +3,14 @@ namespace Common\Controller;
 use Think\Controller;
 class BaseController extends Controller{
 
-		function getinfo($status,$info='',$data=''){
+    public function __construct()
+    {
+        parent::__construct();
+        $config =   M('Config')->getField('key,value');
+        C($config); // 合并配置参数到全局配置
+    }
+
+    function getinfo($status,$info='',$data=''){
 			$val['status'] = $status;
 			$val['info'] = $info;
 			$val['data'] = $data;

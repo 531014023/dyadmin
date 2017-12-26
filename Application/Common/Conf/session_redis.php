@@ -8,9 +8,9 @@
 return array(
 
     //==============================session设置========================================
-    'SESSION_TYPE' => 'redis',
+//    'SESSION_TYPE' => 'redis',
     //session保存类型
-    'SESSION_PREFIX' => 'sess_', //session前缀
+    'SESSION_PREFIX' => 'sess:', //session前缀
     'SESSION_REDIS_HOST'=>'127.0.0.1',
     'SESSION_REDIS_POST'=>"6379",
     'SESSION_REDIS_EXPIRE'=>600,
