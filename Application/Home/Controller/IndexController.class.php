@@ -15,4 +15,21 @@ class IndexController extends Controller {
     {
        echo session("admin");
     }
+
+    public function test()
+    {
+        $private_key = 'D:\qq浏览器下载\openssl-1.1.0g\openssl-1.1.0g\rsa_private_key.pem';
+        $public_key = 'D:\qq浏览器下载\openssl-1.1.0g\openssl-1.1.0g\rsa_public_key.pem';
+        $rsa = new \Org\Util\RSA($public_key,$private_key);
+        $data = "123456";
+        $ex = $rsa->encrypt($data);
+        $ret_d = $rsa->decrypt($ex);
+        print_r($data);
+        print_r("\r\n");
+        print_r($ex);
+        print_r("\r\n");
+        print_r($ret_d);
+    }
 }
+
+
